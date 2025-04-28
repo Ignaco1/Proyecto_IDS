@@ -40,10 +40,14 @@
             lbl_contra = new LinkLabel();
             btn_cerrar = new PictureBox();
             btn_minimizar = new PictureBox();
+            btn_ver = new PictureBox();
+            bnt_dejarVer = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btn_ver).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bnt_dejarVer).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -175,12 +179,36 @@
             btn_minimizar.TabStop = false;
             btn_minimizar.Click += btn_minimizar_Click;
             // 
+            // btn_ver
+            // 
+            btn_ver.Image = (Image)resources.GetObject("btn_ver.Image");
+            btn_ver.Location = new Point(711, 127);
+            btn_ver.Name = "btn_ver";
+            btn_ver.Size = new Size(27, 27);
+            btn_ver.SizeMode = PictureBoxSizeMode.Zoom;
+            btn_ver.TabIndex = 9;
+            btn_ver.TabStop = false;
+            btn_ver.Click += btn_ver_Click;
+            // 
+            // bnt_dejarVer
+            // 
+            bnt_dejarVer.Image = (Image)resources.GetObject("bnt_dejarVer.Image");
+            bnt_dejarVer.Location = new Point(711, 127);
+            bnt_dejarVer.Name = "bnt_dejarVer";
+            bnt_dejarVer.Size = new Size(27, 27);
+            bnt_dejarVer.SizeMode = PictureBoxSizeMode.Zoom;
+            bnt_dejarVer.TabIndex = 10;
+            bnt_dejarVer.TabStop = false;
+            bnt_dejarVer.Click += bnt_dejarVer_Click;
+            // 
             // Form_inicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(32, 30, 45);
             ClientSize = new Size(780, 330);
+            Controls.Add(bnt_dejarVer);
+            Controls.Add(btn_ver);
             Controls.Add(btn_minimizar);
             Controls.Add(btn_cerrar);
             Controls.Add(lbl_contra);
@@ -202,6 +230,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btn_ver).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bnt_dejarVer).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -219,5 +249,7 @@
         private PictureBox btn_cerrar;
         private PictureBox btn_minimizar;
         private PictureBox pictureBox3;
+        private PictureBox btn_ver;
+        private PictureBox bnt_dejarVer;
     }
 }

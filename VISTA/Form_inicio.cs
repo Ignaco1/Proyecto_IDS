@@ -26,7 +26,7 @@ namespace VISTA
 
         private void Form_inicio_Load(object sender, EventArgs e)
         {
-
+            bnt_dejarVer.Visible = false;
         }
 
         private void txt_usuario_Enter(object sender, EventArgs e)
@@ -89,6 +89,20 @@ namespace VISTA
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void btn_ver_Click(object sender, EventArgs e)
+        {
+            txt_contra.UseSystemPasswordChar = false;
+            btn_ver.Visible = false;
+            bnt_dejarVer.Visible = true;
+        }
+
+        private void bnt_dejarVer_Click(object sender, EventArgs e)
+        {
+            txt_contra.UseSystemPasswordChar = true;
+            bnt_dejarVer.Visible = false;
+            btn_ver.Visible = true;
         }
     }
 }
