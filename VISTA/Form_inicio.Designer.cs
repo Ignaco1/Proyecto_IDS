@@ -42,12 +42,15 @@
             btn_minimizar = new PictureBox();
             btn_ver = new PictureBox();
             bnt_dejarVer = new PictureBox();
+            label_error = new Label();
+            pictureBox_error = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_ver).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bnt_dejarVer).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox_error).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -142,6 +145,7 @@
             btn_acceder.TabIndex = 3;
             btn_acceder.Text = "ACCEDER";
             btn_acceder.UseVisualStyleBackColor = false;
+            btn_acceder.Click += btn_acceder_Click;
             // 
             // lbl_contra
             // 
@@ -201,12 +205,35 @@
             bnt_dejarVer.TabStop = false;
             bnt_dejarVer.Click += bnt_dejarVer_Click;
             // 
+            // label_error
+            // 
+            label_error.AutoSize = true;
+            label_error.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_error.ForeColor = Color.DeepPink;
+            label_error.Location = new Point(326, 171);
+            label_error.Name = "label_error";
+            label_error.Size = new Size(93, 17);
+            label_error.TabIndex = 11;
+            label_error.Text = "Mensaje error";
+            // 
+            // pictureBox_error
+            // 
+            pictureBox_error.Image = (Image)resources.GetObject("pictureBox_error.Image");
+            pictureBox_error.Location = new Point(288, 163);
+            pictureBox_error.Name = "pictureBox_error";
+            pictureBox_error.Size = new Size(32, 31);
+            pictureBox_error.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox_error.TabIndex = 12;
+            pictureBox_error.TabStop = false;
+            // 
             // Form_inicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(32, 30, 45);
             ClientSize = new Size(780, 330);
+            Controls.Add(pictureBox_error);
+            Controls.Add(label_error);
             Controls.Add(bnt_dejarVer);
             Controls.Add(btn_ver);
             Controls.Add(btn_minimizar);
@@ -232,6 +259,7 @@
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_ver).EndInit();
             ((System.ComponentModel.ISupportInitialize)bnt_dejarVer).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox_error).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -251,5 +279,7 @@
         private PictureBox pictureBox3;
         private PictureBox btn_ver;
         private PictureBox bnt_dejarVer;
+        private Label label_error;
+        private PictureBox pictureBox_error;
     }
 }

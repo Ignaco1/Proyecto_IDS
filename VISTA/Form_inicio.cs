@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using MODELO;
 
 namespace VISTA
 {
@@ -27,6 +28,8 @@ namespace VISTA
         private void Form_inicio_Load(object sender, EventArgs e)
         {
             bnt_dejarVer.Visible = false;
+            label_error.Visible = false;
+            pictureBox_error.Visible = false;
         }
 
         private void txt_usuario_Enter(object sender, EventArgs e)
@@ -103,6 +106,29 @@ namespace VISTA
             txt_contra.UseSystemPasswordChar = true;
             bnt_dejarVer.Visible = false;
             btn_ver.Visible = true;
+        }
+
+        private void btn_acceder_Click(object sender, EventArgs e)
+        {
+            if (txt_usuario.Text == "USUARIO" || txt_contra.Text == "CONTRASEÑA")
+            {
+                MessageBox.Show("Por favor complete todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                // Aquí puedes agregar la lógica para verificar el usuario y la contraseña
+                // Si son correctos, abrir el formulario principal
+                Form_principal formPrincipal = new Form_principal();
+                formPrincipal.Show();
+                this.Hide();
+            }
+        }
+
+        private void MostrarError(string msj)
+        {
+            label_error.Text = msj;
+            label_error.Visible = true;
+            pictureBox_error.Visible = true;
         }
     }
 }

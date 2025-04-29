@@ -313,6 +313,7 @@
             btn_agregar.TabIndex = 0;
             btn_agregar.Text = "Agregar usuario";
             btn_agregar.UseVisualStyleBackColor = true;
+            btn_agregar.Click += btn_agregar_Click;
             // 
             // Form_usuarios_abm
             // 
