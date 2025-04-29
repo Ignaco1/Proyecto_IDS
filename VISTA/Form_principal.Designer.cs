@@ -80,6 +80,7 @@
             // 
             // btn_cerrarSesion
             // 
+            btn_cerrarSesion.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btn_cerrarSesion.Image = (Image)resources.GetObject("btn_cerrarSesion.Image");
             btn_cerrarSesion.Location = new Point(3, 604);
             btn_cerrarSesion.Name = "btn_cerrarSesion";
