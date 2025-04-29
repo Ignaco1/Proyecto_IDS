@@ -64,9 +64,9 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(0, 31);
+            pictureBox3.Location = new Point(35, 56);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(250, 269);
+            pictureBox3.Size = new Size(177, 201);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 9;
             pictureBox3.TabStop = false;
@@ -193,9 +193,9 @@
             // bnt_dejarVer
             // 
             bnt_dejarVer.Image = (Image)resources.GetObject("bnt_dejarVer.Image");
-            bnt_dejarVer.Location = new Point(711, 127);
+            bnt_dejarVer.Location = new Point(711, 124);
             bnt_dejarVer.Name = "bnt_dejarVer";
-            bnt_dejarVer.Size = new Size(27, 27);
+            bnt_dejarVer.Size = new Size(31, 31);
             bnt_dejarVer.SizeMode = PictureBoxSizeMode.Zoom;
             bnt_dejarVer.TabIndex = 10;
             bnt_dejarVer.TabStop = false;
