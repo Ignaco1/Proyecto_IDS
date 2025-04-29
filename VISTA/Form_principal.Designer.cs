@@ -210,7 +210,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(250, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(846, 34);
+            panel1.Size = new Size(1000, 34);
             panel1.TabIndex = 1;
             panel1.MouseDown += panel1_MouseDown;
             // 
@@ -218,7 +218,7 @@
             // 
             btn_restaurar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_restaurar.Image = (Image)resources.GetObject("btn_restaurar.Image");
-            btn_restaurar.Location = new Point(786, 3);
+            btn_restaurar.Location = new Point(940, 3);
             btn_restaurar.Name = "btn_restaurar";
             btn_restaurar.Size = new Size(30, 30);
             btn_restaurar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -230,7 +230,7 @@
             // 
             btn_maximizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_maximizar.Image = (Image)resources.GetObject("btn_maximizar.Image");
-            btn_maximizar.Location = new Point(786, 3);
+            btn_maximizar.Location = new Point(940, 3);
             btn_maximizar.Name = "btn_maximizar";
             btn_maximizar.Size = new Size(30, 30);
             btn_maximizar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -242,7 +242,7 @@
             // 
             btn_minimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_minimizar.Image = (Image)resources.GetObject("btn_minimizar.Image");
-            btn_minimizar.Location = new Point(759, 3);
+            btn_minimizar.Location = new Point(913, 3);
             btn_minimizar.Name = "btn_minimizar";
             btn_minimizar.Size = new Size(30, 30);
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -254,7 +254,7 @@
             // 
             btn_cerrar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_cerrar.Image = (Image)resources.GetObject("btn_cerrar.Image");
-            btn_cerrar.Location = new Point(813, 3);
+            btn_cerrar.Location = new Point(967, 3);
             btn_cerrar.Name = "btn_cerrar";
             btn_cerrar.Size = new Size(30, 30);
             btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -269,7 +269,7 @@
             panel_forms.Dock = DockStyle.Fill;
             panel_forms.Location = new Point(250, 34);
             panel_forms.Name = "panel_forms";
-            panel_forms.Size = new Size(846, 641);
+            panel_forms.Size = new Size(1000, 641);
             panel_forms.TabIndex = 2;
             panel_forms.MouseDown += panel_forms_MouseDown;
             // 
@@ -277,7 +277,7 @@
             // 
             pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(264, 175);
+            pictureBox2.Location = new Point(341, 175);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(335, 239);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -288,7 +288,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1096, 675);
+            ClientSize = new Size(1250, 675);
             Controls.Add(panel_forms);
             Controls.Add(panel1);
             Controls.Add(panel_menuLateral);

@@ -10,14 +10,19 @@ using System.Windows.Forms;
 
 namespace VISTA
 {
-    public partial class Form_usuarios : Form
+    public partial class Form_usuarios_abm : Form
     {
-        public Form_usuarios()
+        public Form_usuarios_abm()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form_usuarios_abm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_cerrar_Click(object sender, EventArgs e)
         {
             this.Close();
         }

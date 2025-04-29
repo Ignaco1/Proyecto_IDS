@@ -108,7 +108,7 @@ namespace VISTA
 
         private void btn_ABM_usuarios_Click(object sender, EventArgs e)
         {
-            AbrirForms(new Form_usuarios());
+            AbrirForms(new Form_usuarios_abm());
         }
 
         private void btn_cerrar_Click_1(object sender, EventArgs e)
