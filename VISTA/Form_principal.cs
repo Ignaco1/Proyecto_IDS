@@ -134,6 +134,16 @@ namespace VISTA
             btn_restaurar.Visible = false;
             btn_maximizar.Visible = true;
         }
+
+        private void btn_cerrarSesion_Click(object sender, EventArgs e)
+        {
+            var resultado = MessageBox.Show("Esta seguro que desea cerrar sesión?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (resultado == DialogResult.Yes)
+            {
+                this.Close();
+            }
+            
+        }
     }
 }
 

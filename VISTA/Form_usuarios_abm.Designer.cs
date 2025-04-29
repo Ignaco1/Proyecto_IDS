@@ -54,6 +54,7 @@
             btn_eliminar = new Button();
             btn_modificar = new Button();
             btn_agregar = new Button();
+            label7 = new Label();
             panel_carga.SuspendLayout();
             groupBox_carga.SuspendLayout();
             panel_grilla.SuspendLayout();
@@ -74,6 +75,7 @@
             // 
             // groupBox_carga
             // 
+            groupBox_carga.Controls.Add(label7);
             groupBox_carga.Controls.Add(cb_tipoUsuario);
             groupBox_carga.Controls.Add(txt_email);
             groupBox_carga.Controls.Add(txt_contraseña);
@@ -315,6 +317,16 @@
             btn_agregar.UseVisualStyleBackColor = true;
             btn_agregar.Click += btn_agregar_Click;
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Century Gothic", 12.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(45, 363);
+            label7.Name = "label7";
+            label7.Size = new Size(83, 21);
+            label7.TabIndex = 12;
+            label7.Text = "LOGOUT";
+            // 
             // Form_usuarios_abm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -366,5 +378,6 @@
         private TextBox txt_contraseña;
         private TextBox txt_idUsuario;
         private TextBox txt_nombre;
+        private Label label7;
     }
 }

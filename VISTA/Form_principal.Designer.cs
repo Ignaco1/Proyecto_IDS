@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_principal));
             panel_menuLateral = new Panel();
+            btn_cerrarSesion = new PictureBox();
             btn_informes = new Button();
             btn_cabañas_alquiler = new Button();
             panel_ABM = new Panel();
@@ -47,6 +48,7 @@
             panel_forms = new Panel();
             pictureBox2 = new PictureBox();
             panel_menuLateral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)btn_cerrarSesion).BeginInit();
             panel_ABM.SuspendLayout();
             panel_logo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -63,6 +65,7 @@
             // 
             panel_menuLateral.AutoScroll = true;
             panel_menuLateral.BackColor = Color.FromArgb(11, 7, 17);
+            panel_menuLateral.Controls.Add(btn_cerrarSesion);
             panel_menuLateral.Controls.Add(btn_informes);
             panel_menuLateral.Controls.Add(btn_cabañas_alquiler);
             panel_menuLateral.Controls.Add(panel_ABM);
@@ -74,6 +77,17 @@
             panel_menuLateral.Size = new Size(250, 675);
             panel_menuLateral.TabIndex = 0;
             panel_menuLateral.MouseDown += panel_menuLateral_MouseDown;
+            // 
+            // btn_cerrarSesion
+            // 
+            btn_cerrarSesion.Image = (Image)resources.GetObject("btn_cerrarSesion.Image");
+            btn_cerrarSesion.Location = new Point(3, 604);
+            btn_cerrarSesion.Name = "btn_cerrarSesion";
+            btn_cerrarSesion.Size = new Size(134, 68);
+            btn_cerrarSesion.SizeMode = PictureBoxSizeMode.Zoom;
+            btn_cerrarSesion.TabIndex = 5;
+            btn_cerrarSesion.TabStop = false;
+            btn_cerrarSesion.Click += btn_cerrarSesion_Click;
             // 
             // btn_informes
             // 
@@ -298,6 +312,7 @@
             Text = "Form_principal";
             Load += Form_principal_Load;
             panel_menuLateral.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)btn_cerrarSesion).EndInit();
             panel_ABM.ResumeLayout(false);
             panel_logo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -330,5 +345,6 @@
         private PictureBox btn_minimizar;
         private PictureBox btn_maximizar;
         private PictureBox btn_restaurar;
+        private PictureBox btn_cerrarSesion;
     }
 }

@@ -110,18 +110,42 @@ namespace VISTA
 
         private void btn_acceder_Click(object sender, EventArgs e)
         {
-            if (txt_usuario.Text == "USUARIO" || txt_contra.Text == "CONTRASEÑA")
+            if (txt_usuario.Text == "USUARIO" && txt_contra.Text == "CONTRASEÑA")
             {
-                MessageBox.Show("Por favor complete todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MostrarError("Por favor, complete todos los campos.");
+            }
+            else if (txt_usuario.Text == "USUARIO")
+            {
+                MostrarError("Por favor, ingrese el nombre de usuario.");
+            }
+            else if (txt_contra.Text == "CONTRASEÑA")
+            {
+                MostrarError("Por favor, ingrese la contraseña.");
             }
             else
             {
-                // Aquí puedes agregar la lógica para verificar el usuario y la contraseña
-                // Si son correctos, abrir el formulario principal
-                Form_principal formPrincipal = new Form_principal();
-                formPrincipal.Show();
-                this.Hide();
+                Usuario usuario = new Usuario();
+                bool validacion = usuario.ValidarLogin(txt_usuario.Text, txt_contra.Text);
+                if (validacion == true)
+                {
+                    Form_principal form_principal = new Form_principal();
+                    form_principal.Show();
+                    form_principal.FormClosed += CerraSesion;
+                    
+                    this.Hide();
+                }
+                else
+                {
+                    MostrarError("Usuario o contraseña incorrectos.\nIntente otra vez.");
+                    txt_contra.Text = "CONTRASEÑA";
+                    txt_usuario.Text = "USUARIO";
+                    txt_contra.UseSystemPasswordChar = false;
+                    
+                }
+                
             }
+
+
         }
 
         private void MostrarError(string msj)
@@ -129,6 +153,17 @@ namespace VISTA
             label_error.Text = msj;
             label_error.Visible = true;
             pictureBox_error.Visible = true;
+        }
+
+        private void CerraSesion(object sender, FormClosedEventArgs e)
+        {
+            txt_contra.Text = "CONTRASEÑA";
+            txt_usuario.Text = "USUARIO";
+            label_error.Visible = false;
+            pictureBox_error.Visible = false;
+            txt_contra.UseSystemPasswordChar = false;
+            this.Show();
+            
         }
     }
 }

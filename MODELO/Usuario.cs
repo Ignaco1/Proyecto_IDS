@@ -15,5 +15,18 @@ namespace MODELO
         public string Nombre_usuario { get; set; }
         public string Contraseña { get; set; }
         public string Nivel_acceso { get; set; }
+
+        public bool ValidarLogin (string Nombre_usuario, string Contra)
+        {
+            
+            if (Nombre_usuario == "admin" && Contra == "admin")
+            {
+                return true; 
+            }
+            else
+            {
+                return false; 
+            }
+        }
     }
 }
