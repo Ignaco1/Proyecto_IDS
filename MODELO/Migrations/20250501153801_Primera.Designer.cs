@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MODELO.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250426214942_PrimerMigración")]
-    partial class PrimerMigración
+    [Migration("20250501153801_Primera")]
+    partial class Primera
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,22 +108,32 @@ namespace MODELO.Migrations
 
             modelBuilder.Entity("MODELO.Usuario", b =>
                 {
-                    b.Property<string>("UsuarioId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UsuarioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsuarioId"));
 
                     b.Property<string>("Contraseña")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nivel_acceso")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Nivel_acceso")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre_usuario")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tipo_usuario")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

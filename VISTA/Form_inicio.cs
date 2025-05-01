@@ -14,6 +14,8 @@ namespace VISTA
 {
     public partial class Form_inicio : Form
     {
+        CONTROLADORA.Controladora_usuarios contro_usu = new CONTROLADORA.Controladora_usuarios();
+
         public Form_inicio()
         {
             InitializeComponent();
@@ -125,7 +127,7 @@ namespace VISTA
             else
             {
                 Usuario usuario = new Usuario();
-                bool validacion = usuario.ValidarLogin(txt_usuario.Text, txt_contra.Text);
+                bool validacion = contro_usu.ValidarLogin(txt_usuario.Text, txt_contra.Text);
                 if (validacion == true)
                 {
                     Form_principal form_principal = new Form_principal();
@@ -140,7 +142,6 @@ namespace VISTA
                     txt_contra.Text = "CONTRASEÑA";
                     txt_usuario.Text = "USUARIO";
                     txt_contra.UseSystemPasswordChar = false;
-                    
                 }
                 
             }

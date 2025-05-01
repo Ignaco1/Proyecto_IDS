@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MODELO.Migrations
 {
     /// <inheritdoc />
-    public partial class PrimerMigración : Migration
+    public partial class Primera : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,11 +46,14 @@ namespace MODELO.Migrations
                 name: "Usuarios",
                 columns: table => new
                 {
-                    UsuarioId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Tipo_usuario = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nombre_usuario = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Contraseña = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nivel_acceso = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nivel_acceso = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

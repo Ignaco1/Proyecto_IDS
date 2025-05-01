@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CAPA COMUN\CAPA COMUN.csproj" />
     <ProjectReference Include="..\CONTROLADORA\CONTROLADORA.csproj" />
   </ItemGroup>
 

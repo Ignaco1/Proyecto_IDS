@@ -8,6 +8,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CAPA_COMUN;
+using CAPA_COMUN.Cache;
 
 namespace VISTA
 {
@@ -47,11 +49,6 @@ namespace VISTA
 
         #endregion
 
-        private void Form_principal_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void OcultarSubmenu()
         {
             panel_ABM.Visible = false;
@@ -70,19 +67,23 @@ namespace VISTA
             }
         }
 
-        private void btn_ABM_Click(object sender, EventArgs e)
+        private void btn_minimizar_Click_1(object sender, EventArgs e)
         {
-            MostrarSubmenu(panel_ABM);
+            this.WindowState = FormWindowState.Minimized;
         }
 
-        private void btn_cabañas_alquiler_Click(object sender, EventArgs e)
+        private void btn_maximizar_Click(object sender, EventArgs e)
         {
-            OcultarSubmenu();
+            this.WindowState = FormWindowState.Maximized;
+            btn_restaurar.Visible = true;
+            btn_maximizar.Visible = false;
         }
 
-        private void btn_informes_Click(object sender, EventArgs e)
+        private void btn_restaurar_Click(object sender, EventArgs e)
         {
-            OcultarSubmenu();
+            this.WindowState = FormWindowState.Normal;
+            btn_restaurar.Visible = false;
+            btn_maximizar.Visible = true;
         }
 
         private Form formActual = null;
@@ -106,6 +107,36 @@ namespace VISTA
 
         }
 
+        private void Form_principal_Load(object sender, EventArgs e)
+        {
+
+            CargarLabels();
+        }
+
+        private void CargarLabels()
+        {
+            lb_nombre.Text = UsuarioCache.UsuarioNombre;
+            lb_email.Text = UsuarioCache.UsuarioEmail;
+            lb_posicion.Text = UsuarioCache.UsuarioTipo;
+        }
+        
+
+        private void btn_ABM_Click(object sender, EventArgs e)
+        {
+            MostrarSubmenu(panel_ABM);
+        }
+
+        private void btn_cabañas_alquiler_Click(object sender, EventArgs e)
+        {
+            OcultarSubmenu();
+        }
+
+        private void btn_informes_Click(object sender, EventArgs e)
+        {
+            OcultarSubmenu();
+        }
+
+
         private void btn_ABM_usuarios_Click(object sender, EventArgs e)
         {
             AbrirForms(new Form_usuarios_abm());
@@ -116,24 +147,7 @@ namespace VISTA
             Application.Exit();
         }
 
-        private void btn_minimizar_Click_1(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
 
-        private void btn_maximizar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Maximized;
-            btn_restaurar.Visible = true;
-            btn_maximizar.Visible = false;
-        }
-
-        private void btn_restaurar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Normal;
-            btn_restaurar.Visible = false;
-            btn_maximizar.Visible = true;
-        }
 
         private void btn_cerrarSesion_Click(object sender, EventArgs e)
         {
@@ -142,7 +156,7 @@ namespace VISTA
             {
                 this.Close();
             }
-            
+
         }
     }
 }
