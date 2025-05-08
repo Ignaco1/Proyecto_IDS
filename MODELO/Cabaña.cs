@@ -12,8 +12,10 @@ namespace MODELO
     {
         public int CabañaId {  get; set; }
         public string Nombre { get; set; }
-        public int Habitaciones { get; set; }
-        public double Precio_estadia {  get; set; }
+        public int Capacidad { get; set; }
+        public decimal PrecioPorNoche { get; set; }
+        public string Descripcion { get; set; }
+        public bool Activa { get; set; }
 
     }
 }

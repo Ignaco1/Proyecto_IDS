@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CAPA_COMUN;
 using CAPA_COMUN.Cache;
+using MODELO.Factories;
 
 namespace CONTROLADORA
 {
@@ -36,17 +37,29 @@ namespace CONTROLADORA
             return contextUsuario.Usuarios.ToList().AsReadOnly();
         }
 
-        public Usuario CrearUsuario(string nombre, string tipo, string nombre_usuario, string contraseña,string email, int nivel_acceso)
+        public Usuario CrearUsuarioFactory(string tipo, string nombre_usuario, string contraseña,string email)
         {
-            Usuario usuario = new Usuario();
+            UsuarioFactory factory;
 
-            usuario.Nombre = nombre;
-            usuario.Tipo_usuario = tipo;
-            usuario.Nombre_usuario = nombre_usuario;
-            usuario.Contraseña = contraseña;
-            usuario.Email = email;
-            usuario.Nivel_acceso = nivel_acceso;
-            return usuario;
+            switch (tipo)
+            {
+                case "Administrador":
+                    factory = new AdministradorFactory();
+                    break;
+                case "Gerente":
+                    factory = new GerenciaFactory();
+                    break;
+                case "Finanzas":
+                    factory = new FinanzasFactory();
+                    break;
+                case "Administracio":
+                    factory = new AdministracionFactory();
+                    break;
+                default:
+                    throw new Exception("Tipo de usuario no válido");
+            }
+            
+            return factory.CrearUsuario(tipo, nombre_usuario, contraseña, email);
         }
 
         public string AgregarUsuario(Usuario nuevoUsuario)
@@ -63,7 +76,7 @@ namespace CONTROLADORA
             }
         }
 
-        public string ModificarCliente(Usuario usuario)
+        public string ModificarUsuario(Usuario usuario)
         {
             try
             {
@@ -77,7 +90,7 @@ namespace CONTROLADORA
             }
         }
 
-        public string EliminarCliente(Usuario usuario)
+        public string EliminarUsuario(Usuario usuario)
         {
             try
             {
@@ -91,38 +104,45 @@ namespace CONTROLADORA
             }
         }
 
-        public bool ValidarLogin(string Nombre_usuario, string Contra)
+        public Usuario ValidarLogin(string Nombre_usuario, string Contra)
         {
-            ReadOnlyCollection<Usuario> lst_usuarios = ListarUsuarios();
+            var usuario = contextUsuario.Usuarios.FirstOrDefault(u => u.Nombre_usuario == Nombre_usuario && u.Contraseña == Contra);
 
-            foreach (Usuario usuario in lst_usuarios)
-            {
-                if (usuario.Nombre_usuario == Nombre_usuario && usuario.Contraseña == Contra)
-                {
-                    UsuarioCache.UsuarioId = usuario.UsuarioId;
-                    UsuarioCache.UsuarioNombre = usuario.Nombre;
-                    UsuarioCache.UsuarioTipo = usuario.Tipo_usuario;
-                    UsuarioCache.UsuarioEmail = usuario.Email;
-                    UsuarioCache.UsuarioNivel = usuario.Nivel_acceso;
-                    return true;
-                }
-            }
+            if (usuario == null)
+                return null;
 
-            return false;
+            UsuarioCache.UsuarioId = usuario.UsuarioId;
+            UsuarioCache.UsuarioTipo = usuario.Tipo_usuario;
+            UsuarioCache.UsuarioNombre = usuario.Nombre_usuario;
+            UsuarioCache.UsuarioEmail = usuario.Email;
+
+            return usuario;
         }
 
-        public bool ValidarUsuario(string emial)
+        public bool ValidarUsuario(string email)
         {
             ReadOnlyCollection<Usuario> lst_us = ListarUsuarios();
 
             foreach (Usuario usuario in lst_us)
             {
-                if (usuario.Email == emial)
+                if (usuario.Email == email)
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        public List<string> ObtenerPermisosPorTipo(string tipo)
+        {
+            switch (tipo)
+            {
+                case "Administrador": return new Administrador().Permisos;
+                case "Finanzas": return new Finanzas().Permisos;
+                case "Gerencia": return new Gerencia().Permisos;
+                case "Administracion": return new Administracion().Permisos;
+                default: return new List<string>();
+            }
         }
     }
 }

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using MODELO;
+using CAPA_COMUN;
+using CAPA_COMUN.Cache;
 
 namespace VISTA
 {
@@ -126,14 +128,21 @@ namespace VISTA
             }
             else
             {
-                Usuario usuario = new Usuario();
-                bool validacion = contro_usu.ValidarLogin(txt_usuario.Text, txt_contra.Text);
-                if (validacion == true)
+                var usuario = contro_usu.ValidarLogin(txt_usuario.Text, txt_contra.Text);
+
+                if (usuario != null)
                 {
+                    // Usuario válido: se guarda en cache
+                    UsuarioCache.UsuarioId = usuario.UsuarioId;
+                    UsuarioCache.UsuarioNombre = usuario.Nombre_usuario;
+                    UsuarioCache.UsuarioTipo = usuario.Tipo_usuario;
+                    UsuarioCache.UsuarioEmail = usuario.Email;
+
+                    // Abrir el menú
                     Form_principal form_principal = new Form_principal();
                     form_principal.Show();
                     form_principal.FormClosed += CerraSesion;
-                    
+
                     this.Hide();
                 }
                 else

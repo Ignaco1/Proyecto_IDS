@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 namespace MODELO
 {
     [Table("Usuarios")]
-    public class Usuario
+    public abstract class Usuario
     {
         public int UsuarioId { get; set; }
-        public string Nombre { get; set; }
         public string Tipo_usuario { get; set; }
         public string Nombre_usuario { get; set; }
         public string Contraseña { get; set; }
         public string Email { get; set; }
-        public int Nivel_acceso { get; set; }
+        public abstract List<string> Permisos { get;}
+        public string PermisosTexto => string.Join(", ", Permisos);
     }
 }
