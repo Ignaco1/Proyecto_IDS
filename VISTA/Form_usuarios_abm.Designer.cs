@@ -34,14 +34,12 @@
             txt_email = new TextBox();
             txt_contraseña = new TextBox();
             txt_idUsuario = new TextBox();
-            txt_nombre = new TextBox();
             btn_cancelar = new Button();
             btn_guardar = new Button();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
-            label2 = new Label();
             panel_grilla = new Panel();
             groupBox_lista = new GroupBox();
             dataGridView = new DataGridView();
@@ -78,14 +76,12 @@
             groupBox_carga.Controls.Add(txt_email);
             groupBox_carga.Controls.Add(txt_contraseña);
             groupBox_carga.Controls.Add(txt_idUsuario);
-            groupBox_carga.Controls.Add(txt_nombre);
             groupBox_carga.Controls.Add(btn_cancelar);
             groupBox_carga.Controls.Add(btn_guardar);
             groupBox_carga.Controls.Add(label6);
             groupBox_carga.Controls.Add(label5);
             groupBox_carga.Controls.Add(label4);
             groupBox_carga.Controls.Add(label3);
-            groupBox_carga.Controls.Add(label2);
             groupBox_carga.Dock = DockStyle.Fill;
             groupBox_carga.Location = new Point(0, 0);
             groupBox_carga.Name = "groupBox_carga";
@@ -122,13 +118,6 @@
             txt_idUsuario.Name = "txt_idUsuario";
             txt_idUsuario.Size = new Size(121, 23);
             txt_idUsuario.TabIndex = 8;
-            // 
-            // txt_nombre
-            // 
-            txt_nombre.Location = new Point(96, 79);
-            txt_nombre.Name = "txt_nombre";
-            txt_nombre.Size = new Size(151, 23);
-            txt_nombre.TabIndex = 7;
             // 
             // btn_cancelar
             // 
@@ -186,15 +175,6 @@
             label3.Size = new Size(91, 15);
             label3.TabIndex = 1;
             label3.Text = "Tipo de usuario:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(6, 82);
-            label2.Name = "label2";
-            label2.Size = new Size(54, 15);
-            label2.TabIndex = 0;
-            label2.Text = "Nombre:";
             // 
             // panel_grilla
             // 
@@ -357,7 +337,6 @@
         private Button btn_modificar;
         private Label label4;
         private Label label3;
-        private Label label2;
         private Label label1;
         private ComboBox cb_filtro;
         private Button btn_cancelar;
@@ -368,6 +347,5 @@
         private TextBox txt_email;
         private TextBox txt_contraseña;
         private TextBox txt_idUsuario;
-        private TextBox txt_nombre;
     }
 }

@@ -73,7 +73,6 @@ namespace VISTA
 
         private void LIMPIAR()
         {
-            txt_nombre.Text = "";
             txt_email.Text = "";
             txt_contraseña.Text = "";
             txt_idUsuario.Text = "";
@@ -83,102 +82,78 @@ namespace VISTA
 
         private void btn_guardar_Click(object sender, EventArgs e)
         {
-            //MODELO.Usuario usuario = new MODELO.Usuario();
+            MODELO.Usuario usuario = null;
 
-            //#region VALIDACIONES
+            #region VALIDACIONES
 
-            //if (string.IsNullOrWhiteSpace(txt_nombre.Text))
-            //{
-            //    MessageBox.Show("Ingrese el nombre del usuario.", "ERROR");
-            //    return;
-            //}
+            if (string.IsNullOrWhiteSpace(cb_tipoUsuario.Text))
+            {
+                MessageBox.Show("Seleccione un tipo de usuario.", "ERROR");
+                return;
+            }
 
-            //if (string.IsNullOrWhiteSpace(cb_tipoUsuario.Text))
-            //{
-            //    MessageBox.Show("Seleccione un tipo de usuario.", "ERROR");
-            //    return;
-            //}
+            if (cb_tipoUsuario.Text != "Administrador" && cb_tipoUsuario.Text != "Administración" && cb_tipoUsuario.Text != "Finanzas" && cb_tipoUsuario.Text != "Gerencia")
+            {
+                MessageBox.Show("Seleccione un tipo de usuario posible.\nNo ingrese usuario que no existen. ", "ERROR");
+                return;
+            }
 
-            //if (cb_tipoUsuario.Text != "Administrador" && cb_tipoUsuario.Text != "Administración" && cb_tipoUsuario.Text != "Finanzas" && cb_tipoUsuario.Text != "Gerencia")
-            //{
-            //    MessageBox.Show("Seleccione un tipo de usuario posible.\nNo ingrese usuario que no existen. ", "ERROR");
-            //    return;
-            //}
+            if (string.IsNullOrWhiteSpace(txt_idUsuario.Text))
+            {
+                MessageBox.Show("Ingrese el ID del usuario.", "ERROR");
+                return;
+            }
 
-            //if (string.IsNullOrWhiteSpace(txt_idUsuario.Text))
-            //{
-            //    MessageBox.Show("Ingrese el ID del usuario.", "ERROR");
-            //    return;
-            //}
+            if (string.IsNullOrWhiteSpace(txt_contraseña.Text))
+            {
+                MessageBox.Show("Ingrese una contraseña para el usuario.", "ERROR");
+                return;
+            }
 
-            //if (string.IsNullOrWhiteSpace(txt_contraseña.Text))
-            //{
-            //    MessageBox.Show("Ingrese una contraseña para el usuario.", "ERROR");
-            //    return;
-            //}
-            
 
-            //if (string.IsNullOrWhiteSpace(txt_email.Text))
-            //{
-            //    MessageBox.Show("Ingrese el email del usuario.", "ERROR");
-            //    return;
-            //}
+            if (string.IsNullOrWhiteSpace(txt_email.Text))
+            {
+                MessageBox.Show("Ingrese el email del usuario.", "ERROR");
+                return;
+            }
 
-            //if (!ValidarMail(txt_email.Text))
-            //{
-            //    MessageBox.Show("Ingrese un email posible para el usuario.\nEJ: Ignaciocarignano@vitastays.com", "ERROR");
-            //    return;
-            //}
+            if (!ValidarMail(txt_email.Text))
+            {
+                MessageBox.Show("Ingrese un email posible para el usuario.\nEJ: Ignaciocarignano@vitastays.com", "ERROR");
+                return;
+            }
 
-            //#endregion
+            #endregion
 
-            //if (vari == "A")
-            //{
-            //    if (!contro_us.ValidarUsuario(txt_email.Text))
-            //    {
-            //        int nivel = 0;
-            //        switch (cb_tipoUsuario.Text)
-            //        {
-            //            case "Administrador":
-            //                nivel = 0;
-            //                break;
-
-            //            case "Administración":
-            //                nivel = 1;
-            //                break;
-
-            //            case "Finanzas":
-            //                nivel = 2;
-            //                break;
-
-            //            case "Gerencia":
-            //                nivel = 3;
-            //                break;
-            //        }
-
-            //        usuario = contro_us.CrearUsuario(txt_nombre.Text, cb_tipoUsuario.Text, txt_idUsuario.Text, txt_contraseña.Text, txt_email.Text, nivel);
-
-            //       try
-            //       {
-            //            string resultado = contro_us.AgregarUsuario(usuario);
-            //            MessageBox.Show(resultado);
-            //       }
-            //       catch (Exception ex)
-            //       {
-            //            MessageBox.Show("Ocurrió un error en el sistema: " + ex.Message, "ERROR");
-            //       }
+            if (vari == "A")
+            {
+                if (!contro_us.ValidarUsuario(txt_email.Text))
+                {
                     
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Este cliente ya existe\n\nIntente con otro email", "AVISO");
-            //        return;
-            //    }
-            //}
 
-            //ARMA_GRILLA();
-            //MODO_LISTA();
-            //LIMPIAR();
+                    usuario = contro_us.CrearUsuarioFactory(cb_tipoUsuario.Text, txt_idUsuario.Text, txt_contraseña.Text, txt_email.Text);
+
+                    try
+                    {
+                        string resultado = contro_us.AgregarUsuario(usuario);
+                        MessageBox.Show(resultado);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ocurrió un error en el sistema: " + ex.Message, "ERROR");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Este cliente ya existe\n\nIntente con otro email", "AVISO");
+                    return;
+                }
+            }
+
+            ARMA_GRILLA();
+            MODO_LISTA();
+            LIMPIAR();
 
         }
 

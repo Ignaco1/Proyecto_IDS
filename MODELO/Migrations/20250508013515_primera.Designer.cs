@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MODELO.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250501153801_Primera")]
-    partial class Primera
+    [Migration("20250508013515_primera")]
+    partial class primera
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,15 +62,22 @@ namespace MODELO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CabañaId"));
 
-                    b.Property<int>("Habitaciones")
+                    b.Property<bool>("Activa")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Capacidad")
                         .HasColumnType("int");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Precio_estadia")
-                        .HasColumnType("float");
+                    b.Property<decimal>("PrecioPorNoche")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("CabañaId");
 
@@ -122,24 +129,58 @@ namespace MODELO.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Nivel_acceso")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nombre_usuario")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Tipo_usuario")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
 
                     b.HasKey("UsuarioId");
 
                     b.ToTable("Usuarios");
+
+                    b.HasDiscriminator<string>("Tipo_usuario").HasValue("Usuario");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("MODELO.Administracion", b =>
+                {
+                    b.HasBaseType("MODELO.Usuario");
+
+                    b.ToTable("Usuarios");
+
+                    b.HasDiscriminator().HasValue("Administracion");
+                });
+
+            modelBuilder.Entity("MODELO.Administrador", b =>
+                {
+                    b.HasBaseType("MODELO.Usuario");
+
+                    b.ToTable("Usuarios");
+
+                    b.HasDiscriminator().HasValue("Administrador");
+                });
+
+            modelBuilder.Entity("MODELO.Finanzas", b =>
+                {
+                    b.HasBaseType("MODELO.Usuario");
+
+                    b.ToTable("Usuarios");
+
+                    b.HasDiscriminator().HasValue("Finanzas");
+                });
+
+            modelBuilder.Entity("MODELO.Gerencia", b =>
+                {
+                    b.HasBaseType("MODELO.Usuario");
+
+                    b.ToTable("Usuarios");
+
+                    b.HasDiscriminator().HasValue("Gerencia");
                 });
 
             modelBuilder.Entity("MODELO.Alquiler", b =>

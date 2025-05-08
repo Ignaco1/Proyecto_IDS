@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MODELO.Migrations
 {
     /// <inheritdoc />
-    public partial class Primera : Migration
+    public partial class primera : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,8 +18,10 @@ namespace MODELO.Migrations
                     CabañaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Habitaciones = table.Column<int>(type: "int", nullable: false),
-                    Precio_estadia = table.Column<double>(type: "float", nullable: false)
+                    Capacidad = table.Column<int>(type: "int", nullable: false),
+                    PrecioPorNoche = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Activa = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,12 +50,10 @@ namespace MODELO.Migrations
                 {
                     UsuarioId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Tipo_usuario = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Tipo_usuario = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
                     Nombre_usuario = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Contraseña = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nivel_acceso = table.Column<int>(type: "int", nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
