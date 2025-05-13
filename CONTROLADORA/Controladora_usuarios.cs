@@ -46,7 +46,7 @@ namespace CONTROLADORA
                 case "Administrador":
                     factory = new AdministradorFactory();
                     break;
-                case "Gerente":
+                case "Gerencia":
                     factory = new GerenciaFactory();
                     break;
                 case "Finanzas":
@@ -111,21 +111,16 @@ namespace CONTROLADORA
             if (usuario == null)
                 return null;
 
-            UsuarioCache.UsuarioId = usuario.UsuarioId;
-            UsuarioCache.UsuarioTipo = usuario.Tipo_usuario;
-            UsuarioCache.UsuarioNombre = usuario.Nombre_usuario;
-            UsuarioCache.UsuarioEmail = usuario.Email;
-
             return usuario;
         }
 
-        public bool ValidarUsuario(string email)
+        public bool ValidarUsuario(string email, string usuId)
         {
             ReadOnlyCollection<Usuario> lst_us = ListarUsuarios();
 
             foreach (Usuario usuario in lst_us)
             {
-                if (usuario.Email == email)
+                if (usuario.Email == email && usuario.Nombre_usuario == usuId)
                 {
                     return true;
                 }

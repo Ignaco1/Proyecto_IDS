@@ -132,13 +132,14 @@ namespace VISTA
 
                 if (usuario != null)
                 {
-                    // Usuario válido: se guarda en cache
+                    
                     UsuarioCache.UsuarioId = usuario.UsuarioId;
                     UsuarioCache.UsuarioNombre = usuario.Nombre_usuario;
                     UsuarioCache.UsuarioTipo = usuario.Tipo_usuario;
                     UsuarioCache.UsuarioEmail = usuario.Email;
+                    UsuarioCache.UsuarioAcceso = usuario.PermisosTexto;
 
-                    // Abrir el menú
+
                     Form_principal form_principal = new Form_principal();
                     form_principal.Show();
                     form_principal.FormClosed += CerraSesion;

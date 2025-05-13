@@ -52,6 +52,8 @@ namespace VISTA
         private void OcultarSubmenu()
         {
             panel_ABM.Visible = false;
+            panel_seguridad.Visible = false;
+            panel_reservas.Visible = false;
         }
 
         private void MostrarSubmenu(Panel submenu)
@@ -109,7 +111,6 @@ namespace VISTA
 
         private void Form_principal_Load(object sender, EventArgs e)
         {
-
             CargarLabels();
         }
 
@@ -119,7 +120,7 @@ namespace VISTA
             lb_email.Text = UsuarioCache.UsuarioEmail;
             lb_posicion.Text = UsuarioCache.UsuarioTipo;
         }
-        
+
 
         private void btn_ABM_Click(object sender, EventArgs e)
         {
@@ -128,7 +129,7 @@ namespace VISTA
 
         private void btn_cabañas_alquiler_Click(object sender, EventArgs e)
         {
-            OcultarSubmenu();
+            MostrarSubmenu(panel_reservas);
         }
 
         private void btn_informes_Click(object sender, EventArgs e)
@@ -156,6 +157,21 @@ namespace VISTA
             {
                 this.Close();
             }
+
+        }
+
+        private void btn_seguridad_Click(object sender, EventArgs e)
+        {
+            MostrarSubmenu(panel_seguridad);
+        }
+
+        private void btn_asignar_permisos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_reservas_Click(object sender, EventArgs e)
+        {
 
         }
     }

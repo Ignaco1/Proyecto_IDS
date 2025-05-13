@@ -10,7 +10,7 @@ namespace MODELO.Factories
     {
         public override Usuario CrearUsuario(string Tipo, string nombreUsu, string contra, string email)
         {
-            return new Administrador
+            return new Administracion
             {
                 Tipo_usuario = Tipo,
                 Nombre_usuario = nombreUsu,

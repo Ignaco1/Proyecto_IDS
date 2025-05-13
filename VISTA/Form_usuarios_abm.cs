@@ -16,11 +16,11 @@ namespace VISTA
     {
         CONTROLADORA.Controladora_usuarios contro_us = new CONTROLADORA.Controladora_usuarios();
         private string vari;
+
         public Form_usuarios_abm()
         {
             InitializeComponent();
             MODO_LISTA();
-            ARMA_GRILLA();
         }
 
         private void Form_usuarios_abm_Load(object sender, EventArgs e)
@@ -127,10 +127,8 @@ namespace VISTA
 
             if (vari == "A")
             {
-                if (!contro_us.ValidarUsuario(txt_email.Text))
+                if (!contro_us.ValidarUsuario(txt_email.Text, txt_idUsuario.Text))
                 {
-                    
-
                     usuario = contro_us.CrearUsuarioFactory(cb_tipoUsuario.Text, txt_idUsuario.Text, txt_contraseña.Text, txt_email.Text);
 
                     try
