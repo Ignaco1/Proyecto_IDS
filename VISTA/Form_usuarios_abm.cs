@@ -20,6 +20,7 @@ namespace VISTA
         public Form_usuarios_abm()
         {
             InitializeComponent();
+            ARMA_GRILLA();
             MODO_LISTA();
         }
 
@@ -75,7 +76,7 @@ namespace VISTA
         {
             txt_email.Text = "";
             txt_contraseña.Text = "";
-            txt_idUsuario.Text = "";
+            txt_nomUsuario.Text = "";
             cb_tipoUsuario.Text = "";
         }
 
@@ -98,7 +99,7 @@ namespace VISTA
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(txt_idUsuario.Text))
+            if (string.IsNullOrWhiteSpace(txt_nomUsuario.Text))
             {
                 MessageBox.Show("Ingrese el ID del usuario.", "ERROR");
                 return;
@@ -127,9 +128,9 @@ namespace VISTA
 
             if (vari == "A")
             {
-                if (!contro_us.ValidarUsuario(txt_email.Text, txt_idUsuario.Text))
+                if (!contro_us.ValidarUsuario(txt_email.Text, txt_nomUsuario.Text))
                 {
-                    usuario = contro_us.CrearUsuarioFactory(cb_tipoUsuario.Text, txt_idUsuario.Text, txt_contraseña.Text, txt_email.Text);
+                    usuario = contro_us.CrearUsuarioFactory(cb_tipoUsuario.Text, txt_nomUsuario.Text, txt_contraseña.Text, txt_email.Text);
 
                     try
                     {

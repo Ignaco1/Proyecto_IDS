@@ -52,7 +52,7 @@ namespace CONTROLADORA
                 case "Finanzas":
                     factory = new FinanzasFactory();
                     break;
-                case "Administracio":
+                case "Administración":
                     factory = new AdministracionFactory();
                     break;
                 default:
@@ -114,13 +114,13 @@ namespace CONTROLADORA
             return usuario;
         }
 
-        public bool ValidarUsuario(string email, string usuId)
+        public bool ValidarUsuario(string email, string usuNom)
         {
             ReadOnlyCollection<Usuario> lst_us = ListarUsuarios();
 
             foreach (Usuario usuario in lst_us)
             {
-                if (usuario.Email == email && usuario.Nombre_usuario == usuId)
+                if (usuario.Email == email || usuario.Nombre_usuario == usuNom)
                 {
                     return true;
                 }

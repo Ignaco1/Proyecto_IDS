@@ -33,7 +33,7 @@
             cb_tipoUsuario = new ComboBox();
             txt_email = new TextBox();
             txt_contraseña = new TextBox();
-            txt_idUsuario = new TextBox();
+            txt_nomUsuario = new TextBox();
             btn_cancelar = new Button();
             btn_guardar = new Button();
             label6 = new Label();
@@ -65,9 +65,9 @@
             // 
             panel_carga.Controls.Add(groupBox_carga);
             panel_carga.Dock = DockStyle.Right;
-            panel_carga.Location = new Point(871, 0);
+            panel_carga.Location = new Point(866, 0);
             panel_carga.Name = "panel_carga";
-            panel_carga.Size = new Size(283, 643);
+            panel_carga.Size = new Size(309, 643);
             panel_carga.TabIndex = 0;
             // 
             // groupBox_carga
@@ -75,7 +75,7 @@
             groupBox_carga.Controls.Add(cb_tipoUsuario);
             groupBox_carga.Controls.Add(txt_email);
             groupBox_carga.Controls.Add(txt_contraseña);
-            groupBox_carga.Controls.Add(txt_idUsuario);
+            groupBox_carga.Controls.Add(txt_nomUsuario);
             groupBox_carga.Controls.Add(btn_cancelar);
             groupBox_carga.Controls.Add(btn_guardar);
             groupBox_carga.Controls.Add(label6);
@@ -85,7 +85,7 @@
             groupBox_carga.Dock = DockStyle.Fill;
             groupBox_carga.Location = new Point(0, 0);
             groupBox_carga.Name = "groupBox_carga";
-            groupBox_carga.Size = new Size(283, 643);
+            groupBox_carga.Size = new Size(309, 643);
             groupBox_carga.TabIndex = 0;
             groupBox_carga.TabStop = false;
             groupBox_carga.Text = "Carga de datos";
@@ -93,36 +93,36 @@
             // cb_tipoUsuario
             // 
             cb_tipoUsuario.FormattingEnabled = true;
-            cb_tipoUsuario.Location = new Point(96, 115);
+            cb_tipoUsuario.Location = new Point(124, 115);
             cb_tipoUsuario.Name = "cb_tipoUsuario";
             cb_tipoUsuario.Size = new Size(151, 23);
             cb_tipoUsuario.TabIndex = 11;
             // 
             // txt_email
             // 
-            txt_email.Location = new Point(96, 229);
+            txt_email.Location = new Point(124, 229);
             txt_email.Name = "txt_email";
             txt_email.Size = new Size(175, 23);
             txt_email.TabIndex = 10;
             // 
             // txt_contraseña
             // 
-            txt_contraseña.Location = new Point(96, 189);
+            txt_contraseña.Location = new Point(124, 189);
             txt_contraseña.Name = "txt_contraseña";
             txt_contraseña.Size = new Size(151, 23);
             txt_contraseña.TabIndex = 9;
             // 
-            // txt_idUsuario
+            // txt_nomUsuario
             // 
-            txt_idUsuario.Location = new Point(96, 154);
-            txt_idUsuario.Name = "txt_idUsuario";
-            txt_idUsuario.Size = new Size(121, 23);
-            txt_idUsuario.TabIndex = 8;
+            txt_nomUsuario.Location = new Point(124, 154);
+            txt_nomUsuario.Name = "txt_nomUsuario";
+            txt_nomUsuario.Size = new Size(121, 23);
+            txt_nomUsuario.TabIndex = 8;
             // 
             // btn_cancelar
             // 
             btn_cancelar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btn_cancelar.Location = new Point(178, 608);
+            btn_cancelar.Location = new Point(204, 608);
             btn_cancelar.Name = "btn_cancelar";
             btn_cancelar.Size = new Size(102, 23);
             btn_cancelar.TabIndex = 6;
@@ -163,9 +163,9 @@
             label4.AutoSize = true;
             label4.Location = new Point(6, 157);
             label4.Name = "label4";
-            label4.Size = new Size(78, 15);
+            label4.Size = new Size(112, 15);
             label4.TabIndex = 2;
-            label4.Text = "Id de usuario:";
+            label4.Text = "Nombre de usuario:";
             // 
             // label3
             // 
@@ -182,7 +182,7 @@
             panel_grilla.Dock = DockStyle.Fill;
             panel_grilla.Location = new Point(0, 0);
             panel_grilla.Name = "panel_grilla";
-            panel_grilla.Size = new Size(871, 643);
+            panel_grilla.Size = new Size(866, 643);
             panel_grilla.TabIndex = 1;
             // 
             // groupBox_lista
@@ -193,7 +193,7 @@
             groupBox_lista.Dock = DockStyle.Fill;
             groupBox_lista.Location = new Point(0, 0);
             groupBox_lista.Name = "groupBox_lista";
-            groupBox_lista.Size = new Size(871, 643);
+            groupBox_lista.Size = new Size(866, 643);
             groupBox_lista.TabIndex = 0;
             groupBox_lista.TabStop = false;
             groupBox_lista.Text = "Lista de usuarios";
@@ -206,7 +206,7 @@
             dataGridView.Location = new Point(3, 55);
             dataGridView.Name = "dataGridView";
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView.Size = new Size(865, 521);
+            dataGridView.Size = new Size(860, 521);
             dataGridView.TabIndex = 2;
             // 
             // panel_filtro
@@ -217,7 +217,7 @@
             panel_filtro.Dock = DockStyle.Top;
             panel_filtro.Location = new Point(3, 19);
             panel_filtro.Name = "panel_filtro";
-            panel_filtro.Size = new Size(865, 36);
+            panel_filtro.Size = new Size(860, 36);
             panel_filtro.TabIndex = 1;
             // 
             // label1
@@ -240,7 +240,7 @@
             // btn_filtrar
             // 
             btn_filtrar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btn_filtrar.Location = new Point(760, 6);
+            btn_filtrar.Location = new Point(755, 6);
             btn_filtrar.Name = "btn_filtrar";
             btn_filtrar.Size = new Size(102, 23);
             btn_filtrar.TabIndex = 4;
@@ -256,13 +256,13 @@
             panel_botones.Dock = DockStyle.Bottom;
             panel_botones.Location = new Point(3, 576);
             panel_botones.Name = "panel_botones";
-            panel_botones.Size = new Size(865, 64);
+            panel_botones.Size = new Size(860, 64);
             panel_botones.TabIndex = 0;
             // 
             // btn_cerrar
             // 
             btn_cerrar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btn_cerrar.Location = new Point(760, 32);
+            btn_cerrar.Location = new Point(755, 32);
             btn_cerrar.Name = "btn_cerrar";
             btn_cerrar.Size = new Size(102, 23);
             btn_cerrar.TabIndex = 3;
@@ -302,7 +302,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1154, 643);
+            ClientSize = new Size(1175, 643);
             Controls.Add(panel_grilla);
             Controls.Add(panel_carga);
             FormBorderStyle = FormBorderStyle.None;
@@ -346,6 +346,6 @@
         private ComboBox cb_tipoUsuario;
         private TextBox txt_email;
         private TextBox txt_contraseña;
-        private TextBox txt_idUsuario;
+        private TextBox txt_nomUsuario;
     }
 }

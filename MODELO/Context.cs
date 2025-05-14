@@ -9,7 +9,7 @@ namespace MODELO
 {
     public class Context : DbContext
     {
-        private string cadena_conexion = "Data Source=RCAL1304P06-835;Initial Catalog=Sistema_cabañas;Integrated Security=True;Persist Security Info=False;Pooling=False;Multiple Active Result Sets=False;Encrypt=False;Trust Server Certificate=False;Command Timeout=0";
+        private string cadena_conexion = "Data Source=DESKTOP-VQDCHA3\\SQLEXPRESS;Initial Catalog=Sistema_IDS_cabañas;Integrated Security=True;Persist Security Info=False;Pooling=False;Multiple Active Result Sets=False;Encrypt=False;Trust Server Certificate=False;Command Timeout=0";
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
@@ -25,7 +25,7 @@ namespace MODELO
                 .HasValue<Administrador>("Administrador")
                 .HasValue<Finanzas>("Finanzas")
                 .HasValue<Gerencia>("Gerencia")
-                .HasValue<Administracion>("Administracion");
+                .HasValue<Administracion>("Administración");
 
             base.OnModelCreating(modelBuilder);
         }
