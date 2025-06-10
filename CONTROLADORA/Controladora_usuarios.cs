@@ -68,7 +68,7 @@ namespace CONTROLADORA
             {
                 contextUsuario.Add(nuevoUsuario);
                 contextUsuario.SaveChanges();
-                return $"Nuevo usuario agregado al sistema con exito";
+                return "Nuevo usuario agregado al sistema con exito";
             }
             catch (Exception ex)
             {
@@ -82,7 +82,7 @@ namespace CONTROLADORA
             {
                 contextUsuario.Update(usuario);
                 contextUsuario.SaveChanges();
-                return $"Usuario modificado con exito";
+                return "Usuario modificado con exito";
             }
             catch (Exception ex)
             {
@@ -96,7 +96,7 @@ namespace CONTROLADORA
             {
                 contextUsuario.Remove(usuario);
                 contextUsuario.SaveChanges();
-                return $"Usuario eliminado con exito";
+                return "Usuario eliminado con exito";
             }
             catch (Exception ex)
             {
@@ -114,13 +114,13 @@ namespace CONTROLADORA
             return usuario;
         }
 
-        public bool ValidarUsuario(string email, string usuNom)
+        public bool ValidarUsuario(string email, string usuNom, int id)
         {
             ReadOnlyCollection<Usuario> lst_us = ListarUsuarios();
 
             foreach (Usuario usuario in lst_us)
             {
-                if (usuario.Email == email || usuario.Nombre_usuario == usuNom)
+                if ((usuario.Email == email || usuario.Nombre_usuario == usuNom) && usuario.UsuarioId != id)
                 {
                     return true;
                 }

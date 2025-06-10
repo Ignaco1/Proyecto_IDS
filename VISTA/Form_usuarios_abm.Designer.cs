@@ -128,6 +128,7 @@
             btn_cancelar.TabIndex = 6;
             btn_cancelar.Text = "Cancelar";
             btn_cancelar.UseVisualStyleBackColor = true;
+            btn_cancelar.Click += btn_cancelar_Click;
             // 
             // btn_guardar
             // 
@@ -208,6 +209,7 @@
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView.Size = new Size(860, 521);
             dataGridView.TabIndex = 2;
+            dataGridView.CellClick += dataGridView_CellClick;
             // 
             // panel_filtro
             // 
@@ -278,6 +280,7 @@
             btn_eliminar.TabIndex = 2;
             btn_eliminar.Text = "Eliminar usuario";
             btn_eliminar.UseVisualStyleBackColor = true;
+            btn_eliminar.Click += btn_eliminar_Click;
             // 
             // btn_modificar
             // 
@@ -287,6 +290,7 @@
             btn_modificar.TabIndex = 1;
             btn_modificar.Text = "Modificar usuario";
             btn_modificar.UseVisualStyleBackColor = true;
+            btn_modificar.Click += btn_modificar_Click;
             // 
             // btn_agregar
             // 
