@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MODELO.Composite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace MODELO
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Alquiler> Alquileres { get; set; }
         public DbSet<Cabaña> Cabañas { get; set; }
+        public DbSet<Grupo> Grupos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlServer(cadena_conexion);
 

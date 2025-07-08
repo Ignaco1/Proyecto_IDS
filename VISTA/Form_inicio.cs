@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using MODELO;
 using CAPA_COMUN;
 using CAPA_COMUN.Cache;
+using MODELO.Composite;
 
 namespace VISTA
 {
@@ -21,6 +22,8 @@ namespace VISTA
         public Form_inicio()
         {
             InitializeComponent();
+
+            AdministradorDeGrupos.Inicializar();
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -132,12 +135,11 @@ namespace VISTA
 
                 if (usuario != null)
                 {
-                    
+
                     UsuarioCache.UsuarioId = usuario.UsuarioId;
                     UsuarioCache.UsuarioNombre = usuario.Nombre_usuario;
-                    UsuarioCache.UsuarioTipo = usuario.Tipo_usuario;
                     UsuarioCache.UsuarioEmail = usuario.Email;
-                    UsuarioCache.UsuarioAcceso = usuario.PermisosTexto;
+                    UsuarioCache.UsuarioGrupoNombre = usuario.Grupo?.Nombre;
 
 
                     Form_principal form_principal = new Form_principal();
