@@ -15,7 +15,7 @@ namespace VISTA
 {
     public partial class Form_principal : Form
     {
-        public Form_principal()
+        /*public Form_principal()
         {
             InitializeComponent();
             OcultarSubmenu();
@@ -195,7 +195,7 @@ namespace VISTA
         private void btn_reservas_Click(object sender, EventArgs e)
         {
 
-        }
+        }*/
     }
 }
 

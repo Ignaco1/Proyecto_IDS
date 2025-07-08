@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MODELO.Composite
 {
+    [Table("Permisos compuestos")]
     public class PermisoCompuesto:Permiso
     {
-        public List<Permiso> Permisos { get; set; } = new();
+        public virtual List<Permiso> Permisos { get; set; } = new();
 
         public override void Mostrar(int nivel = 0)
         {

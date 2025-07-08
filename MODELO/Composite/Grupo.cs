@@ -13,6 +13,6 @@ namespace MODELO.Composite
         public int GrupoId { get; set; }
         public string Nombre { get; set; }
 
-        public List<Permiso> Permisos { get; set; } = new();
+        public virtual List<Permiso> Permisos { get; set; } = new();
     }
 }

@@ -15,22 +15,7 @@ namespace MODELO
         public string Nombre_usuario { get; set; }
         public string Contraseña { get; set; }
         public string Email { get; set; }
-        public Grupo Grupo { get; set; }
+        public virtual Grupo Grupo { get; set; }
 
-        public Grupo Grupo1
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public Reservas Reservas
-        {
-            get => default;
-            set
-            {
-            }
-        }
     }
 }

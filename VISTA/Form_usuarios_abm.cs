@@ -14,7 +14,7 @@ namespace VISTA
 {
     public partial class Form_usuarios_abm : Form
     {
-        CONTROLADORA.Controladora_usuarios contro_us = new CONTROLADORA.Controladora_usuarios();
+        /*CONTROLADORA.Controladora_usuarios contro_us = new CONTROLADORA.Controladora_usuarios();
         private string vari;
         private int indice = 0;
 
@@ -300,6 +300,6 @@ namespace VISTA
         {
             MODO_LISTA();
             LIMPIAR();
-        }
+        }*/
     }
 }
