@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace MODELO.Composite
 {
-    [Table("Permisos compuestos")]
     public class PermisoCompuesto:Permiso
     {
         public virtual List<Permiso> Permisos { get; set; } = new();

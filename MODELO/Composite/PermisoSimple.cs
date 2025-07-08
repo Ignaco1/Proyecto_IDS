@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace MODELO.Composite
 {
-    [Table("Permisos simples")]
     public class PermisoSimple : Permiso
     {
         public override void Mostrar(int nivel = 0)

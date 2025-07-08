@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace MODELO.Composite
 {
-    [Table("Permisos")]
     public abstract class Permiso
     {
         public int PermisoId { get; set; }

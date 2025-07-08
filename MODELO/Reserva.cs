@@ -11,13 +11,12 @@ namespace MODELO
     public class Reserva
     {
         public int ReservaId { get; set; }
-        public int IdCliente { get; set; }
-        public int IdCabaña { get; set; }
-        public DateOnly FechaIngreso { get; set; }
-        public DateOnly FechaEgreso { get; set; }
-
+        //public int IdCliente { get; set; }
+        //public int IdCabaña { get; set; }
         public virtual Cliente Cliente { get; set; }
         public virtual Cabaña Cabaña { get; set; }
+        public DateOnly FechaIngreso { get; set; }
+        public DateOnly FechaEgreso { get; set; }
         public virtual List<Pago> Pagos { get; set; } = new();
     }
 }

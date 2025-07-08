@@ -81,24 +81,10 @@
   </Class>
   <Class Name="MODELO.Reserva">
     <Position X="5.75" Y="3" Width="1.5" />
-    <AssociationLine Name="Cabaña" Type="MODELO.Cabaña">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="2.089" Y="7.82" />
-      </MemberNameLabel>
-    </AssociationLine>
-    <AssociationLine Name="Cliente" Type="MODELO.Cliente">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="1.048" Y="-3.93" />
-      </MemberNameLabel>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAgAAAACAAAAAAgEAACAAAAAAABAAAAAAAABBAAAAAA=</HashCode>
+      <HashCode>AAgAAAACAAAAAAgEAACAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
       <FileName>Reserva.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Cabaña" />
-      <Property Name="Cliente" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="MODELO.Usuario">
     <Position X="3" Y="3" Width="1.5" />
