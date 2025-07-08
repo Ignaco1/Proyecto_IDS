@@ -14,7 +14,7 @@ namespace VISTA
 {
     public partial class Form_usuarios_abm : Form
     {
-        /*CONTROLADORA.Controladora_usuarios contro_us = new CONTROLADORA.Controladora_usuarios();
+        CONTROLADORA.Controladora_usuarios contro_us = new CONTROLADORA.Controladora_usuarios();
         private string vari;
         private int indice = 0;
 
@@ -155,7 +155,8 @@ namespace VISTA
             {
                 usuario = contro_us.ListarUsuarios()[indice];
 
-                bool cambioTipo = usuario.Tipo_usuario != cb_tipoUsuario.Text;
+                bool cambioTipo = true;
+                //bool cambioTipo = usuario.Tipo_usuario != cb_tipoUsuario.Text;
 
                 if (!contro_us.ValidarUsuario(txt_email.Text, txt_nomUsuario.Text, usuario.UsuarioId))
                 {
@@ -246,7 +247,7 @@ namespace VISTA
 
             usuario = contro_us.ListarUsuarios()[indice];
 
-            cb_tipoUsuario.Text = usuario.Tipo_usuario;
+            //cb_tipoUsuario.Text = usuario.Tipo_usuario;
             txt_nomUsuario.Text = usuario.Nombre_usuario;
             txt_contraseña.Text = usuario.Contraseña;
             txt_email.Text = usuario.Email;
@@ -277,7 +278,7 @@ namespace VISTA
 
             usuario = contro_us.ListarUsuarios()[indice];
 
-            DialogResult result = MessageBox.Show($"Está seguro que desea eliminar al usuario:\n\nNombre: {usuario.Nombre_usuario}\n\nTipo: {usuario.Tipo_usuario}\n\nEmail: {usuario.Email}", "AVISO", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show($"Está seguro que desea eliminar al usuario:\n\nNombre: {usuario.Nombre_usuario}\n\nEmail: {usuario.Email}", "AVISO", MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
@@ -300,6 +301,6 @@ namespace VISTA
         {
             MODO_LISTA();
             LIMPIAR();
-        }*/
+        }
     }
 }

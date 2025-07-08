@@ -17,38 +17,14 @@ namespace MODELO
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Alquiler> Alquileres { get; set; }
         public DbSet<Cabaña> Cabañas { get; set; }
+        public DbSet<Pago> Pagos { get; set; }
+        public DbSet<Reserva> Reservas { get; set; }
         public DbSet<Grupo> Grupos { get; set; }
-        public DbSet<Permiso> Permisos { get; set; }
-        public DbSet<PermisoSimple> PermisosSimples { get; set; }
-        public DbSet<PermisoCompuesto> PermisosCompuestos { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlServer(cadena2);
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Permiso>()
-                .HasDiscriminator<string>("TipoPermiso")
-                .HasValue<PermisoSimple>("Simple")
-                .HasValue<PermisoCompuesto>("Compuesto");
 
-            modelBuilder.Entity<PermisoCompuesto>()
-                .HasMany(p => p.Permisos)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Usuario>()
-                .HasOne(u => u.Grupo)
-                .WithMany()
-                .HasForeignKey("GrupoId") 
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Grupo>()
-                .HasMany(g => g.Permisos)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            base.OnModelCreating(modelBuilder);
-        }
 
     }
 }

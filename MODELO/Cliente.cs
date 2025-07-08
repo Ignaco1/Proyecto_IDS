@@ -16,7 +16,7 @@ namespace MODELO
         public string Email {  get; set; }
         public string Telefono { get; set; }
 
-        public Pagos Pagos
+        public Pago Pagos
         {
             get => default;
             set

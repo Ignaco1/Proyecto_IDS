@@ -15,11 +15,10 @@ namespace VISTA
 {
     public partial class Form_principal : Form
     {
-        /*public Form_principal()
+        public Form_principal()
         {
             InitializeComponent();
             OcultarSubmenu();
-            AplicarPermisos();
             btn_restaurar.Visible = false;
         }
 
@@ -57,26 +56,6 @@ namespace VISTA
             panel_reservas.Visible = false;
         }
 
-        private void AplicarPermisos()
-        {
-            var permisos = UsuarioCache.UsuarioAcceso.Split(", ").ToList();
-
-            btn_ABM.Visible = permisos.Contains("ABM");
-            btn_seguridad.Visible = permisos.Contains("Seguridad");
-            btn_cabañas_alquiler.Visible = permisos.Contains("Reservas");
-            btn_informes.Visible = permisos.Contains("Informes");
-
-            if (UsuarioCache.UsuarioTipo == "Administración")
-            {
-                btn_ABM_usuarios.Visible = false;
-                btn_ABM_cabañas.Visible = false;
-            }
-
-            if (UsuarioCache.UsuarioTipo == "Gerencia")
-            {
-                btn_ABM_usuarios.Visible = false;
-            }
-        }
 
         private void MostrarSubmenu(Panel submenu)
         {
@@ -140,7 +119,7 @@ namespace VISTA
         {
             lb_nombre.Text = UsuarioCache.UsuarioNombre;
             lb_email.Text = UsuarioCache.UsuarioEmail;
-            lb_posicion.Text = UsuarioCache.UsuarioTipo;
+            lb_posicion.Text = UsuarioCache.UsuarioGrupoNombre;
         }
 
 
@@ -195,7 +174,7 @@ namespace VISTA
         private void btn_reservas_Click(object sender, EventArgs e)
         {
 
-        }*/
+        }
     }
 }
 

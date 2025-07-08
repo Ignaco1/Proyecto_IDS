@@ -24,18 +24,10 @@
   </Class>
   <Class Name="MODELO.Composite.Permiso">
     <Position X="0.75" Y="5" Width="1.5" />
-    <AssociationLine Name="a" Type="MODELO.Composite.Grupo">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="0.943" Y="6.112" />
-      </MemberNameLabel>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAQAAAAAAAAAgAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <HashCode>AACAAAAAAAQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Composite\Permiso.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="a" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="MODELO.Composite.PermisoCompuesto">
     <Position X="3" Y="6.5" Width="1.75" />
@@ -54,28 +46,20 @@
   <Class Name="MODELO.Alquiler">
     <Position X="8.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAEAAAAAAAAAACAAAAAgAAAAAAAAAAAAAIIAAA=</HashCode>
+      <HashCode>AAAAAAAEAAAAAAAAAACAAAAAAAAAAAAAAAABAAIIAAA=</HashCode>
       <FileName>Alquiler.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MODELO.Cabaña">
     <Position X="5.75" Y="0.5" Width="1.5" />
-    <AssociationLine Name="Alquiler" Type="MODELO.Alquiler">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="4.954" Y="-9.034" />
-      </MemberNameLabel>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAAAAAgAAAgAABAAAAAAAgAAAAAAAAAIA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAgAABAAAAAAAgAAAAAAAAAIA=</HashCode>
       <FileName>Cabaña.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Alquiler" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="MODELO.Cliente">
     <Position X="7.25" Y="5.75" Width="1.5" />
-    <AssociationLine Name="Pagos" Type="MODELO.Pagos">
+    <AssociationLine Name="Pagos" Type="MODELO.Pago">
       <MemberNameLabel ManuallyPlaced="true">
         <Position X="-2.182" Y="-6.221" />
       </MemberNameLabel>
@@ -88,14 +72,14 @@
       <Property Name="Pagos" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="MODELO.Pagos">
+  <Class Name="MODELO.Pago">
     <Position X="8.75" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAACAAAAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAAAQA=</HashCode>
-      <FileName>Pagos.cs</FileName>
+      <HashCode>AIAACAAAAAAAAAAAAAAAAAAIAAEAAAAAACAAAAAAAQA=</HashCode>
+      <FileName>Pago.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MODELO.Reservas">
+  <Class Name="MODELO.Reserva">
     <Position X="5.75" Y="3" Width="1.5" />
     <AssociationLine Name="Cabaña" Type="MODELO.Cabaña">
       <MemberNameLabel ManuallyPlaced="true">
@@ -107,41 +91,28 @@
         <Position X="1.048" Y="-3.93" />
       </MemberNameLabel>
     </AssociationLine>
-    <AssociationLine Name="Pagos" Type="MODELO.Pagos">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-1.025" Y="-7.148" />
-      </MemberNameLabel>
-    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAgAAAACAAAAAAgEAACAAAAAAABAAAAAAAABBAAAAAA=</HashCode>
-      <FileName>Reservas.cs</FileName>
+      <FileName>Reserva.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Cabaña" />
       <Property Name="Cliente" />
-      <Property Name="Pagos" />
     </ShowAsAssociation>
   </Class>
   <Class Name="MODELO.Usuario">
     <Position X="3" Y="3" Width="1.5" />
-    <AssociationLine Name="Grupo1" Type="MODELO.Composite.Grupo">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-2.286" Y="-7.69" />
-      </MemberNameLabel>
-    </AssociationLine>
-    <AssociationLine Name="Reservas" Type="MODELO.Reservas">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-1.848" Y="-6.867" />
-      </MemberNameLabel>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACIAAAIAAABAAQAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAACIAAAIAAABAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Usuario.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Grupo1" />
-      <Property Name="Reservas" />
-    </ShowAsAssociation>
+  </Class>
+  <Class Name="MODELO.Factories.UsuarioFactory">
+    <Position X="3.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Factory\UsuarioFactory.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

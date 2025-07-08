@@ -17,12 +17,5 @@ namespace MODELO
         public string Descripcion { get; set; }
         public bool Activa { get; set; }
 
-        public Alquiler Alquiler
-        {
-            get => default;
-            set
-            {
-            }
-        }
     }
 }
