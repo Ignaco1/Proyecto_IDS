@@ -13,5 +13,29 @@ namespace MODELO
         public int IdCabaña { get; set; }
         public DateTime FechaIngreso { get; set; }
         public DateTime FechaEgreso { get; set; }
+
+        public Cabaña Cabaña
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Cliente Cliente
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Pagos Pagos
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }
