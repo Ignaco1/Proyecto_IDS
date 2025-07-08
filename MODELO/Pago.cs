@@ -11,7 +11,6 @@ namespace MODELO
     public class Pago
     {
         public int PagoId { get; set; }
-        public int IdReserva { get; set; }
         public virtual Reserva Reserva { get; set; }
         public DateOnly FechaPago { get; set; }
         public decimal Monto { get; set; }

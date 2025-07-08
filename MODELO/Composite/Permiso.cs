@@ -9,7 +9,6 @@ namespace MODELO.Composite
 {
     public abstract class Permiso
     {
-        public int PermisoId { get; set; }
         public string Nombre { get; set; }
 
         public abstract void Mostrar(int nivel = 0);

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CAPA_COMUN;
 using CAPA_COMUN.Cache;
-using MODELO.Factories;
+
 using MODELO.Composite;
 
 namespace CONTROLADORA

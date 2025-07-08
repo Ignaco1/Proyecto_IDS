@@ -10,13 +10,6 @@ namespace MODELO.Composite
     {
         public static Dictionary<string, Grupo> Grupos { get; private set; } = new();
 
-        public static Grupo Grupo
-        {
-            get => default;
-            set
-            {
-            }
-        }
 
         public static void Inicializar()
         {

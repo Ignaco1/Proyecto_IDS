@@ -2,18 +2,10 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="MODELO.Composite.AdministradorDeGrupos">
     <Position X="0.75" Y="0.5" Width="1.5" />
-    <AssociationLine Name="Grupo" Type="MODELO.Composite.Grupo">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-0.38" Y="-7.888" />
-      </MemberNameLabel>
-    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AgAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Composite\AdministradorDeGrupos.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Grupo" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="MODELO.Composite.Grupo">
     <Position X="0.75" Y="3" Width="1.5" />
@@ -25,7 +17,7 @@
   <Class Name="MODELO.Composite.Permiso">
     <Position X="0.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AACAAAAAAAQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Composite\Permiso.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -59,30 +51,22 @@
   </Class>
   <Class Name="MODELO.Cliente">
     <Position X="7.25" Y="5.75" Width="1.5" />
-    <AssociationLine Name="Pagos" Type="MODELO.Pago">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-2.182" Y="-6.221" />
-      </MemberNameLabel>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAEAAAAAACAAAAgAABAAgAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <HashCode>AAEAAAAAACAAAAAAABAAgAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
       <FileName>Cliente.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Pagos" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="MODELO.Pago">
     <Position X="8.75" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAACAAAAAAAAAAAAAAAAAAIAAEAAAAAACAAAAAAAQA=</HashCode>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAIAAEAAAAAACAAAAAAAQA=</HashCode>
       <FileName>Pago.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MODELO.Reserva">
     <Position X="5.75" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAACAAAAAAgEAACAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <HashCode>AAgAAAACAAAAAAgEAACAAAAAAAAAAAAAAAABAAAAAAg=</HashCode>
       <FileName>Reserva.cs</FileName>
     </TypeIdentifier>
   </Class>
