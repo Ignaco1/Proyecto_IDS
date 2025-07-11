@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using CAPA_COMUN;
 using CAPA_COMUN.Cache;
-using MODELO.Factories;
 
 namespace CONTROLADORA
 {
@@ -39,27 +38,20 @@ namespace CONTROLADORA
 
         public Usuario CrearUsuarioFactory(string tipo, string nombre_usuario, string contraseña,string email)
         {
-            UsuarioFactory factory;
+            Usuario usuario = new Usuario();
 
-            switch (tipo)
-            {
-                case "Administrador":
-                    factory = new AdministradorFactory();
-                    break;
-                case "Gerencia":
-                    factory = new GerenciaFactory();
-                    break;
-                case "Finanzas":
-                    factory = new FinanzasFactory();
-                    break;
-                case "Administración":
-                    factory = new AdministracionFactory();
-                    break;
-                default:
-                    throw new Exception("Tipo de usuario no válido");
-            }
-            
-            return factory.CrearUsuario(tipo, nombre_usuario, contraseña, email);
+            usuario.Tipo_usuario = tipo;
+            usuario.Nombre_usuario = nombre_usuario;
+            usuario.Contraseña = contraseña;
+            usuario.Email = email;
+
+            // Cache
+            UsuarioCache.UsuarioId = usuario.UsuarioId;
+            UsuarioCache.UsuarioNombre = usuario.Nombre_usuario;
+            UsuarioCache.UsuarioTipo = usuario.Tipo_usuario;
+            UsuarioCache.UsuarioEmail = usuario.Email;
+
+            return usuario; 
         }
 
         public string AgregarUsuario(Usuario nuevoUsuario)
@@ -128,16 +120,16 @@ namespace CONTROLADORA
             return false;
         }
 
-        public List<string> ObtenerPermisosPorTipo(string tipo)
-        {
-            switch (tipo)
-            {
-                case "Administrador": return new Administrador().Permisos;
-                case "Finanzas": return new Finanzas().Permisos;
-                case "Gerencia": return new Gerencia().Permisos;
-                case "Administracion": return new Administracion().Permisos;
-                default: return new List<string>();
-            }
-        }
+        //public List<string> ObtenerPermisosPorTipo(string tipo)
+        //{
+        //    switch (tipo)
+        //    {
+        //        case "Administrador": return new Administrador().Permisos;
+        //        case "Finanzas": return new Finanzas().Permisos;
+        //        case "Gerencia": return new Gerencia().Permisos;
+        //        case "Administracion": return new Administracion().Permisos;
+        //        default: return new List<string>();
+        //    }
+        //}
     }
 }

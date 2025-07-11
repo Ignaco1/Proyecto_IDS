@@ -137,7 +137,6 @@ namespace VISTA
                     UsuarioCache.UsuarioNombre = usuario.Nombre_usuario;
                     UsuarioCache.UsuarioTipo = usuario.Tipo_usuario;
                     UsuarioCache.UsuarioEmail = usuario.Email;
-                    UsuarioCache.UsuarioAcceso = usuario.PermisosTexto;
 
 
                     Form_principal form_principal = new Form_principal();

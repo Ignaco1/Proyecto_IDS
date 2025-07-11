@@ -9,7 +9,7 @@ namespace MODELO
 {
     public class Context : DbContext
     {
-        private string cadena_conexion = "Data Source=DESKTOP-VQDCHA3\\SQLEXPRESS;Initial Catalog=Sistema_IDS_cabañas;Integrated Security=True;Persist Security Info=False;Pooling=False;Multiple Active Result Sets=False;Encrypt=False;Trust Server Certificate=False;Command Timeout=0";
+        private string cadena_conexion = "Data Source=DESKTOP-VQDCHA3\\SQLEXPRESS;Initial Catalog=Sistema_IDS;Integrated Security=True;Persist Security Info=False;Pooling=False;Multiple Active Result Sets=False;Encrypt=False;Trust Server Certificate=False;Command Timeout=0";
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
@@ -18,16 +18,6 @@ namespace MODELO
 
         protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlServer(cadena_conexion);
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Usuario>()
-                .HasDiscriminator<string>("Tipo_usuario")
-                .HasValue<Administrador>("Administrador")
-                .HasValue<Finanzas>("Finanzas")
-                .HasValue<Gerencia>("Gerencia")
-                .HasValue<Administracion>("Administración");
 
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

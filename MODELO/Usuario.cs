@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MODELO.Composite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -8,14 +9,16 @@ using System.Threading.Tasks;
 namespace MODELO
 {
     [Table("Usuarios")]
-    public abstract class Usuario
+    public class Usuario
     {
         public int UsuarioId { get; set; }
-        public string Tipo_usuario { get; set; }
         public string Nombre_usuario { get; set; }
         public string Contraseña { get; set; }
         public string Email { get; set; }
-        public abstract List<string> Permisos { get;}
-        public string PermisosTexto => string.Join(", ", Permisos);
+
+        public int GrupoId { get; set; }
+        public Grupo Grupo { get; set; }
+
+        public bool TienePermiso(string permisoNombre) => Grupo?.Permisos?.Any(p => p.Nombre == permisoNombre) ?? false;
     }
 }
