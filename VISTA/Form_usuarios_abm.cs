@@ -155,51 +155,33 @@ namespace VISTA
             {
                 usuario = contro_us.ListarUsuarios()[indice];
 
-                bool cambioTipo = usuario.Tipo_usuario != cb_tipoUsuario.Text;
-
                 if (!contro_us.ValidarUsuario(txt_email.Text, txt_nomUsuario.Text, usuario.UsuarioId))
                 {
-                    if (cambioTipo)
+                    usuario.Nombre_usuario = txt_nomUsuario.Text;
+                    usuario.Contraseña = txt_contraseña.Text;
+                    usuario.Email = txt_email.Text;
+
+                    try
                     {
-                        contro_us.EliminarUsuario(usuario);
-
-                        var nuevoUsuario = contro_us.CrearUsuarioFactory(cb_tipoUsuario.Text, txt_nomUsuario.Text, txt_contraseña.Text, txt_email.Text);
-
-                        try
-                        {
-                            contro_us.AgregarUsuario(nuevoUsuario);
-                            MessageBox.Show("Usuario modificado con exito");
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Ocurrió un error en el sistema: " + ex.Message, "ERROR");
-                            return;
-                        }
+                        string resultado = contro_us.ModificarUsuario(usuario);
+                        MessageBox.Show(resultado);
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        usuario.Nombre_usuario = txt_nomUsuario.Text;
-                        usuario.Contraseña = txt_contraseña.Text;
-                        usuario.Email = txt_email.Text;
-
-                        try
-                        {
-                            string resultado = contro_us.ModificarUsuario(usuario);
-                            MessageBox.Show(resultado);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Ocurrió un error en el sistema: " + ex.Message, "ERROR");
-                            return;
-                        }
+                        MessageBox.Show("Ocurrió un error en el sistema: " + ex.Message, "ERROR");
+                        return;
                     }
                 }
+
                 else
                 {
                     MessageBox.Show("Este usuario ya existe\n\nIntente con otro email o nombre de usuario", "AVISO");
                     return;
                 }
+
             }
+            
+            
 
             ARMA_GRILLA();
             MODO_LISTA();
@@ -246,7 +228,6 @@ namespace VISTA
 
             usuario = contro_us.ListarUsuarios()[indice];
 
-            cb_tipoUsuario.Text = usuario.Tipo_usuario;
             txt_nomUsuario.Text = usuario.Nombre_usuario;
             txt_contraseña.Text = usuario.Contraseña;
             txt_email.Text = usuario.Email;
@@ -277,7 +258,7 @@ namespace VISTA
 
             usuario = contro_us.ListarUsuarios()[indice];
 
-            DialogResult result = MessageBox.Show($"Está seguro que desea eliminar al usuario:\n\nNombre: {usuario.Nombre_usuario}\n\nTipo: {usuario.Tipo_usuario}\n\nEmail: {usuario.Email}", "AVISO", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show($"Está seguro que desea eliminar al usuario:\n\nNombre: {usuario.Nombre_usuario}\n\nEmail: {usuario.Email}", "AVISO", MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {

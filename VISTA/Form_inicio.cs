@@ -135,7 +135,6 @@ namespace VISTA
                     
                     UsuarioCache.UsuarioId = usuario.UsuarioId;
                     UsuarioCache.UsuarioNombre = usuario.Nombre_usuario;
-                    UsuarioCache.UsuarioTipo = usuario.Tipo_usuario;
                     UsuarioCache.UsuarioEmail = usuario.Email;
 
 

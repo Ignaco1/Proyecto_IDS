@@ -32,7 +32,8 @@
             panel_menuLateral = new Panel();
             btn_informes = new Button();
             panel_reservas = new Panel();
-            btn_alquilar = new Button();
+            btn_ver_reservas = new Button();
+            btn_realizar_alquilar = new Button();
             btn_cabañas_alquiler = new Button();
             panel_ABM = new Panel();
             btn_ABM_cabañas = new Button();
@@ -40,6 +41,8 @@
             btn_ABM_usuarios = new Button();
             btn_ABM = new Button();
             panel_seguridad = new Panel();
+            button2 = new Button();
+            btn_gestionar_grupos = new Button();
             btn_gestionar_permisos = new Button();
             btn_seguridad = new Button();
             btn_cerrarSesion = new PictureBox();
@@ -55,7 +58,6 @@
             btn_cerrar = new PictureBox();
             panel_forms = new Panel();
             pictureBox2 = new PictureBox();
-            btn_reservas = new Button();
             panel_menuLateral.SuspendLayout();
             panel_reservas.SuspendLayout();
             panel_ABM.SuspendLayout();
@@ -98,7 +100,7 @@
             btn_informes.FlatAppearance.BorderSize = 0;
             btn_informes.FlatStyle = FlatStyle.Flat;
             btn_informes.ForeColor = Color.Gainsboro;
-            btn_informes.Location = new Point(0, 365);
+            btn_informes.Location = new Point(0, 426);
             btn_informes.Name = "btn_informes";
             btn_informes.Padding = new Padding(10, 0, 0, 0);
             btn_informes.Size = new Size(275, 30);
@@ -111,30 +113,46 @@
             // panel_reservas
             // 
             panel_reservas.BackColor = Color.FromArgb(40, 40, 40);
-            panel_reservas.Controls.Add(btn_reservas);
-            panel_reservas.Controls.Add(btn_alquilar);
+            panel_reservas.Controls.Add(btn_ver_reservas);
+            panel_reservas.Controls.Add(btn_realizar_alquilar);
             panel_reservas.Dock = DockStyle.Top;
-            panel_reservas.Location = new Point(0, 305);
+            panel_reservas.Location = new Point(0, 366);
             panel_reservas.Name = "panel_reservas";
             panel_reservas.Size = new Size(275, 60);
             panel_reservas.TabIndex = 19;
             // 
-            // btn_alquilar
+            // btn_ver_reservas
             // 
-            btn_alquilar.BackColor = Color.FromArgb(40, 40, 40);
-            btn_alquilar.Dock = DockStyle.Top;
-            btn_alquilar.FlatAppearance.BorderSize = 0;
-            btn_alquilar.FlatStyle = FlatStyle.Flat;
-            btn_alquilar.ForeColor = Color.Gainsboro;
-            btn_alquilar.Location = new Point(0, 0);
-            btn_alquilar.Name = "btn_alquilar";
-            btn_alquilar.Padding = new Padding(35, 0, 0, 0);
-            btn_alquilar.Size = new Size(275, 30);
-            btn_alquilar.TabIndex = 3;
-            btn_alquilar.Text = "Alquiler";
-            btn_alquilar.TextAlign = ContentAlignment.MiddleLeft;
-            btn_alquilar.UseVisualStyleBackColor = false;
-            btn_alquilar.Click += btn_reservas_Click;
+            btn_ver_reservas.BackColor = Color.FromArgb(40, 40, 40);
+            btn_ver_reservas.Dock = DockStyle.Top;
+            btn_ver_reservas.FlatAppearance.BorderSize = 0;
+            btn_ver_reservas.FlatStyle = FlatStyle.Flat;
+            btn_ver_reservas.ForeColor = Color.Gainsboro;
+            btn_ver_reservas.Location = new Point(0, 30);
+            btn_ver_reservas.Name = "btn_ver_reservas";
+            btn_ver_reservas.Padding = new Padding(35, 0, 0, 0);
+            btn_ver_reservas.Size = new Size(275, 30);
+            btn_ver_reservas.TabIndex = 4;
+            btn_ver_reservas.Text = "Ver reservas";
+            btn_ver_reservas.TextAlign = ContentAlignment.MiddleLeft;
+            btn_ver_reservas.UseVisualStyleBackColor = false;
+            // 
+            // btn_realizar_alquilar
+            // 
+            btn_realizar_alquilar.BackColor = Color.FromArgb(40, 40, 40);
+            btn_realizar_alquilar.Dock = DockStyle.Top;
+            btn_realizar_alquilar.FlatAppearance.BorderSize = 0;
+            btn_realizar_alquilar.FlatStyle = FlatStyle.Flat;
+            btn_realizar_alquilar.ForeColor = Color.Gainsboro;
+            btn_realizar_alquilar.Location = new Point(0, 0);
+            btn_realizar_alquilar.Name = "btn_realizar_alquilar";
+            btn_realizar_alquilar.Padding = new Padding(35, 0, 0, 0);
+            btn_realizar_alquilar.Size = new Size(275, 30);
+            btn_realizar_alquilar.TabIndex = 3;
+            btn_realizar_alquilar.Text = "Realizar alquiler";
+            btn_realizar_alquilar.TextAlign = ContentAlignment.MiddleLeft;
+            btn_realizar_alquilar.UseVisualStyleBackColor = false;
+            btn_realizar_alquilar.Click += btn_reservas_Click;
             // 
             // btn_cabañas_alquiler
             // 
@@ -142,7 +160,7 @@
             btn_cabañas_alquiler.FlatAppearance.BorderSize = 0;
             btn_cabañas_alquiler.FlatStyle = FlatStyle.Flat;
             btn_cabañas_alquiler.ForeColor = Color.Gainsboro;
-            btn_cabañas_alquiler.Location = new Point(0, 275);
+            btn_cabañas_alquiler.Location = new Point(0, 336);
             btn_cabañas_alquiler.Name = "btn_cabañas_alquiler";
             btn_cabañas_alquiler.Padding = new Padding(10, 0, 0, 0);
             btn_cabañas_alquiler.Size = new Size(275, 30);
@@ -159,7 +177,7 @@
             panel_ABM.Controls.Add(btn_ABM_clientes);
             panel_ABM.Controls.Add(btn_ABM_usuarios);
             panel_ABM.Dock = DockStyle.Top;
-            panel_ABM.Location = new Point(0, 186);
+            panel_ABM.Location = new Point(0, 247);
             panel_ABM.Name = "panel_ABM";
             panel_ABM.Size = new Size(275, 89);
             panel_ABM.TabIndex = 17;
@@ -216,7 +234,7 @@
             btn_ABM.FlatAppearance.BorderSize = 0;
             btn_ABM.FlatStyle = FlatStyle.Flat;
             btn_ABM.ForeColor = Color.Gainsboro;
-            btn_ABM.Location = new Point(0, 156);
+            btn_ABM.Location = new Point(0, 217);
             btn_ABM.Name = "btn_ABM";
             btn_ABM.Padding = new Padding(10, 0, 0, 0);
             btn_ABM.Size = new Size(275, 30);
@@ -229,12 +247,46 @@
             // panel_seguridad
             // 
             panel_seguridad.BackColor = Color.FromArgb(35, 32, 39);
+            panel_seguridad.Controls.Add(button2);
+            panel_seguridad.Controls.Add(btn_gestionar_grupos);
             panel_seguridad.Controls.Add(btn_gestionar_permisos);
             panel_seguridad.Dock = DockStyle.Top;
             panel_seguridad.Location = new Point(0, 126);
             panel_seguridad.Name = "panel_seguridad";
-            panel_seguridad.Size = new Size(275, 30);
+            panel_seguridad.Size = new Size(275, 91);
             panel_seguridad.TabIndex = 7;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(40, 40, 40);
+            button2.Dock = DockStyle.Top;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.ForeColor = Color.Gainsboro;
+            button2.Location = new Point(0, 60);
+            button2.Name = "button2";
+            button2.Padding = new Padding(35, 0, 0, 0);
+            button2.Size = new Size(275, 30);
+            button2.TabIndex = 2;
+            button2.Text = "Asignar permisos";
+            button2.TextAlign = ContentAlignment.MiddleLeft;
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // btn_gestionar_grupos
+            // 
+            btn_gestionar_grupos.BackColor = Color.FromArgb(40, 40, 40);
+            btn_gestionar_grupos.Dock = DockStyle.Top;
+            btn_gestionar_grupos.FlatAppearance.BorderSize = 0;
+            btn_gestionar_grupos.FlatStyle = FlatStyle.Flat;
+            btn_gestionar_grupos.ForeColor = Color.Gainsboro;
+            btn_gestionar_grupos.Location = new Point(0, 30);
+            btn_gestionar_grupos.Name = "btn_gestionar_grupos";
+            btn_gestionar_grupos.Padding = new Padding(35, 0, 0, 0);
+            btn_gestionar_grupos.Size = new Size(275, 30);
+            btn_gestionar_grupos.TabIndex = 1;
+            btn_gestionar_grupos.Text = "Gestionar grupos";
+            btn_gestionar_grupos.TextAlign = ContentAlignment.MiddleLeft;
+            btn_gestionar_grupos.UseVisualStyleBackColor = false;
             // 
             // btn_gestionar_permisos
             // 
@@ -248,7 +300,7 @@
             btn_gestionar_permisos.Padding = new Padding(35, 0, 0, 0);
             btn_gestionar_permisos.Size = new Size(275, 30);
             btn_gestionar_permisos.TabIndex = 0;
-            btn_gestionar_permisos.Text = "Gestionar Permisos";
+            btn_gestionar_permisos.Text = "Gestionar permisos";
             btn_gestionar_permisos.TextAlign = ContentAlignment.MiddleLeft;
             btn_gestionar_permisos.UseVisualStyleBackColor = false;
             btn_gestionar_permisos.Click += btn_asignar_permisos_Click;
@@ -420,22 +472,6 @@
             pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
             // 
-            // btn_reservas
-            // 
-            btn_reservas.BackColor = Color.FromArgb(40, 40, 40);
-            btn_reservas.Dock = DockStyle.Top;
-            btn_reservas.FlatAppearance.BorderSize = 0;
-            btn_reservas.FlatStyle = FlatStyle.Flat;
-            btn_reservas.ForeColor = Color.Gainsboro;
-            btn_reservas.Location = new Point(0, 30);
-            btn_reservas.Name = "btn_reservas";
-            btn_reservas.Padding = new Padding(35, 0, 0, 0);
-            btn_reservas.Size = new Size(275, 30);
-            btn_reservas.TabIndex = 4;
-            btn_reservas.Text = "Reservas";
-            btn_reservas.TextAlign = ContentAlignment.MiddleLeft;
-            btn_reservas.UseVisualStyleBackColor = false;
-            // 
             // Form_principal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -494,7 +530,9 @@
         private Button btn_gestionar_permisos;
         private Button btn_informes;
         private Panel panel_reservas;
-        private Button btn_alquilar;
-        private Button btn_reservas;
+        private Button btn_realizar_alquilar;
+        private Button btn_ver_reservas;
+        private Button button2;
+        private Button btn_gestionar_grupos;
     }
 }

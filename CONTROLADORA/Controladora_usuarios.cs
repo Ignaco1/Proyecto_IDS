@@ -40,7 +40,6 @@ namespace CONTROLADORA
         {
             Usuario usuario = new Usuario();
 
-            usuario.Tipo_usuario = tipo;
             usuario.Nombre_usuario = nombre_usuario;
             usuario.Contraseña = contraseña;
             usuario.Email = email;
@@ -48,7 +47,6 @@ namespace CONTROLADORA
             // Cache
             UsuarioCache.UsuarioId = usuario.UsuarioId;
             UsuarioCache.UsuarioNombre = usuario.Nombre_usuario;
-            UsuarioCache.UsuarioTipo = usuario.Tipo_usuario;
             UsuarioCache.UsuarioEmail = usuario.Email;
 
             return usuario; 
