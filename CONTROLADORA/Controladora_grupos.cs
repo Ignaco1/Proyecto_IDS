@@ -77,7 +77,7 @@ namespace CONTROLADORA
                 }
                 catch (Exception ex)
                 {
-                    return "Error al agregar grupo: " + ex.Message;
+                    return "Ocurrio un error en el sistema:  " + ex.Message;
                 }
             }
         }
@@ -94,7 +94,7 @@ namespace CONTROLADORA
                 }
                 catch (Exception ex)
                 {
-                    return "Error al modificar grupo: " + ex.Message;
+                    return "Ocurrio un error en el sistema:  " + ex.Message;
                 }
             }
 
@@ -112,7 +112,7 @@ namespace CONTROLADORA
                 }
                 catch (Exception ex)
                 {
-                    return "Error al eliminar grupo: " + ex.Message;
+                    return "Ocurrio un error en el sistema:  " + ex.Message;
                 }
             }
 
@@ -188,7 +188,7 @@ namespace CONTROLADORA
                 }
                 catch (Exception ex)
                 {
-                    return "Error al asignar permisos: " + ex.Message;
+                    return "Ocurrio un error en el sistema:  " + ex.Message;
                 }
             }
         }

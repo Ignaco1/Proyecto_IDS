@@ -144,10 +144,11 @@ namespace VISTA
             if (vari == "M")
             {
                 grupo = contro_grup.ListarGrupos()[indice];
-                
+
+                grupo.Nombre = txt_nombre.Text;
+
                 if (!contro_grup.ValidarGrupoModificado(grupo))
                 {
-                    grupo.Nombre = txt_nombre.Text;
 
                     try
                     {

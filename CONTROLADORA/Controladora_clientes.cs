@@ -63,7 +63,7 @@ namespace CONTROLADORA
                 }
                 catch (Exception ex)
                 {
-                    return "Error al agregar el cliente: " + ex.Message;
+                    return "Ocurrio un error en el sistema:  " + ex.Message;
                 }
             }
 
@@ -83,7 +83,7 @@ namespace CONTROLADORA
                 }
                 catch (Exception ex)
                 {
-                    return "Error al modificar el cliente: " + ex.Message;
+                    return "Ocurrio un error en el sistema:  " + ex.Message;
                 }
             }
 
@@ -103,7 +103,7 @@ namespace CONTROLADORA
                 }
                 catch (Exception ex)
                 {
-                    return "Error al eliminar el cliente: " + ex.Message;
+                    return "Ocurrio un error en el sistema:  " + ex.Message;
                 }
             }
 

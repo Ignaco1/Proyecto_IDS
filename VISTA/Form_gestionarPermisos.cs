@@ -150,9 +150,10 @@ namespace VISTA
             {
                 permiso = contro_per.ListarPermisos()[indice];
 
+                permiso.Nombre = txt_nombre.Text;
+
                 if (!contro_per.ValidarPermisoModificado(permiso))
                 {
-                    permiso.Nombre = txt_nombre.Text;
 
                     try
                     {
