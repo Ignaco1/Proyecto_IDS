@@ -184,7 +184,7 @@ namespace VISTA
 
             vari = "M";
 
-            MODELO.Composite.Grupo grupo = contro_grup.ListarGruposConPermisos()[indice];
+            MODELO.Composite.Grupo grupo = contro_grup.ListarGrupos()[indice];
 
             txt_nombre.Text = grupo.Nombre;
 

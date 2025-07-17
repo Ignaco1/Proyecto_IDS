@@ -7,13 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using CAPA_COMUN;
 using CAPA_COMUN.Cache;
+using MODELO.Composite;
+using Microsoft.EntityFrameworkCore;
 
 namespace CONTROLADORA
 {
     public class Controladora_usuarios
     {
         private static Controladora_usuarios instancia;
-        private Context contextUsuario;
+       // private Context contextUsuario;
         public static Controladora_usuarios Instancia
         {
             get
@@ -28,94 +30,144 @@ namespace CONTROLADORA
 
         public Controladora_usuarios()
         {
-            contextUsuario = new Context();
+            
         }
 
         public ReadOnlyCollection<Usuario> ListarUsuarios()
         {
-            return contextUsuario.Usuarios.ToList().AsReadOnly();
+            using (var context = new Context())
+            {
+                var usuariosConGrupo = context.Usuarios
+                .Include(u => u.Grupo)
+                .ToList();
+
+                return usuariosConGrupo.AsReadOnly();
+            }
+
         }
 
-        public Usuario CrearUsuarioFactory(string tipo, string nombre_usuario, string contraseña,string email)
+        public Usuario CrearUsuario(string grupoNombre, string nombre, string apellido, string nombre_usuario, string contraseña, string email)
         {
-            Usuario usuario = new Usuario();
+            using (var context = new Context())
+            {
+                var grupo = context.Grupos.FirstOrDefault(g => g.Nombre == grupoNombre);
 
-            usuario.Nombre_usuario = nombre_usuario;
-            usuario.Contraseña = contraseña;
-            usuario.Email = email;
+                if (grupo == null)
+                {
+                    throw new Exception("Grupo no encontrado.");
+                }
 
-            // Cache
-            UsuarioCache.UsuarioId = usuario.UsuarioId;
-            UsuarioCache.UsuarioNombre = usuario.Nombre_usuario;
-            UsuarioCache.UsuarioEmail = usuario.Email;
+                var usuario = new Usuario();
 
-            return usuario; 
+                usuario.Nombre = nombre;
+                usuario.Apellido = apellido;
+                usuario.Nombre_usuario = nombre_usuario;
+                usuario.Contraseña = contraseña;
+                usuario.Email = email;
+                usuario.GrupoId = grupo.GrupoId;
+                
+
+                return usuario;
+            }
         }
 
         public string AgregarUsuario(Usuario nuevoUsuario)
         {
-            try
+            using (var context = new Context())
             {
-                contextUsuario.Add(nuevoUsuario);
-                contextUsuario.SaveChanges();
-                return "Nuevo usuario agregado al sistema con exito";
-            }
-            catch (Exception ex)
-            {
-                return "Ocurrió un error en el sistema: " + ex.Message;
+                try
+                {
+                    context.Add(nuevoUsuario);
+                    context.SaveChanges();
+                    return "Nuevo usuario agregado al sistema con exito";
+                }
+                catch (Exception ex)
+                {
+                    return "Ocurrió un error en el sistema: " + ex.Message;
+
+                }
+
             }
         }
 
         public string ModificarUsuario(Usuario usuario)
         {
-            try
+            using (var context = new Context())
             {
-                contextUsuario.Update(usuario);
-                contextUsuario.SaveChanges();
-                return "Usuario modificado con exito";
+                try
+                {
+                    var usuarioDb = context.Usuarios.FirstOrDefault(u => u.UsuarioId == usuario.UsuarioId);
+
+                    if (usuarioDb == null)
+                        return "Usuario no encontrado.";
+
+                    usuarioDb.Nombre = usuario.Nombre;
+                    usuarioDb.Apellido = usuario.Apellido;
+                    usuarioDb.Nombre_usuario = usuario.Nombre_usuario;
+                    usuarioDb.Contraseña = usuario.Contraseña;
+                    usuarioDb.Email = usuario.Email;
+                    usuarioDb.GrupoId = usuario.GrupoId;
+
+                    context.SaveChanges();
+                    return "Usuario modificado con éxito";
+                }
+                catch (Exception ex)
+                {
+                    return "Ocurrió un error en el sistema: " + ex.Message;
+                }
             }
-            catch (Exception ex)
-            {
-                return "Ocurrió un error en el sistema: " + ex.Message;
-            }
+
         }
 
         public string EliminarUsuario(Usuario usuario)
         {
-            try
+            using (var context = new Context())
             {
-                contextUsuario.Remove(usuario);
-                contextUsuario.SaveChanges();
-                return "Usuario eliminado con exito";
+
+                try
+                {
+                    context.Remove(usuario);
+                    context.SaveChanges();
+                    return "Usuario eliminado con exito";
+                }
+                catch (Exception ex)
+                {
+                    return "Ocurrió un error en el sistema:  " + ex.Message;
+                }
             }
-            catch (Exception ex)
-            {
-                return "Ocurrió un error en el sistema: " + ex.Message;
-            }
+
         }
 
         public Usuario ValidarLogin(string Nombre_usuario, string Contra)
         {
-            var usuario = contextUsuario.Usuarios.FirstOrDefault(u => u.Nombre_usuario == Nombre_usuario && u.Contraseña == Contra);
+            using (var context = new Context())
+            {
+                var usuario = context.Usuarios.FirstOrDefault(u => u.Nombre_usuario == Nombre_usuario && u.Contraseña == Contra);
 
-            if (usuario == null)
-                return null;
+                if (usuario == null)
+                    return null;
 
-            return usuario;
+                return usuario;
+            }
+
         }
 
         public bool ValidarUsuario(string email, string usuNom, int id)
         {
-            ReadOnlyCollection<Usuario> lst_us = ListarUsuarios();
-
-            foreach (Usuario usuario in lst_us)
+            using (var context = new Context())
             {
-                if ((usuario.Email == email || usuario.Nombre_usuario == usuNom) && usuario.UsuarioId != id)
+                ReadOnlyCollection<Usuario> lst_us = ListarUsuarios();
+
+                foreach (Usuario usuario in lst_us)
                 {
-                    return true;
+                    if ((usuario.Email == email || usuario.Nombre_usuario == usuNom) && usuario.UsuarioId != id)
+                    {
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
+
         }
 
     }

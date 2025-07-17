@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MODELO;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -15,38 +17,53 @@ namespace VISTA
     public partial class Form_usuarios_abm : Form
     {
         CONTROLADORA.Controladora_usuarios contro_us = new CONTROLADORA.Controladora_usuarios();
-        private string vari;
+        CONTROLADORA.Controladora_grupos contro_grup = new CONTROLADORA.Controladora_grupos();
+        private string vari = "";
         private int indice = 0;
+        private string variF = "";
+        private List<Usuario> listaUsuariosFiltro = new List<Usuario>();
 
         public Form_usuarios_abm()
         {
             InitializeComponent();
             ARMA_GRILLA();
             MODO_LISTA();
+            btn_quitarFiltro.Enabled = false;
         }
 
         private void Form_usuarios_abm_Load(object sender, EventArgs e)
         {
-            groupBox_carga.Enabled = false;
+            cb_tipoUsuario.Items.Clear();
+            cb_tipoFiltro.Items.Clear();
 
-            cb_filtro.Items.Add("Administrador");
-            cb_filtro.Items.Add("Administración");
-            cb_filtro.Items.Add("Finanzas");
-            cb_filtro.Items.Add("Gerencia");
+            var grupos = contro_grup.ListarGrupos();
 
-            cb_tipoUsuario.Items.Add("Administrador");
-            cb_tipoUsuario.Items.Add("Administración");
-            cb_tipoUsuario.Items.Add("Finanzas");
-            cb_tipoUsuario.Items.Add("Gerencia");
-
-
+            foreach (var grupo in grupos)
+            {
+                cb_tipoUsuario.Items.Add(grupo.Nombre);
+                cb_tipoFiltro.Items.Add(grupo.Nombre);
+            }
 
         }
 
         private void ARMA_GRILLA()
         {
+
             dataGridView.DataSource = null;
-            dataGridView.DataSource = contro_us.ListarUsuarios();
+
+            var usuarios = contro_us.ListarUsuarios()
+            .Select(u => new
+            {
+                u.UsuarioId,
+                Nombre = u.Nombre + " " + u.Apellido,
+                Nombre_de_usuario = u.Nombre_usuario,
+                u.Email,
+                u.GrupoId,
+                Grupo = u.Grupo?.Nombre ?? "Sin grupo"
+
+            }).ToList();
+
+            dataGridView.DataSource = usuarios;
         }
 
         private void MODO_LISTA()
@@ -75,10 +92,12 @@ namespace VISTA
 
         private void LIMPIAR()
         {
+            txt_usuario.Text = "";
+            txt_apellido.Text = "";
+            txt_nombre.Text = "";
+            cb_tipoUsuario.Text = "";
             txt_email.Text = "";
             txt_contraseña.Text = "";
-            txt_nomUsuario.Text = "";
-            cb_tipoUsuario.Text = "";
         }
 
 
@@ -90,48 +109,70 @@ namespace VISTA
 
             if (string.IsNullOrWhiteSpace(cb_tipoUsuario.Text))
             {
-                MessageBox.Show("Seleccione un tipo de usuario.", "ERROR");
+                MessageBox.Show("Seleccione un tipo de usuario.", "Error");
                 return;
             }
 
-            if (cb_tipoUsuario.Text != "Administrador" && cb_tipoUsuario.Text != "Administración" && cb_tipoUsuario.Text != "Finanzas" && cb_tipoUsuario.Text != "Gerencia")
+            var grupoSeleccionado = contro_grup.ObtenerGrupoPorNombre(cb_tipoUsuario.Text);
+
+            if (grupoSeleccionado == null)
             {
-                MessageBox.Show("Seleccione un tipo de usuario posible.\nNo ingrese usuario que no existen. ", "ERROR");
+                MessageBox.Show("Seleccione un tipo de usuario posible.\nNo ingrese usuarios que no existen. ", "Error");
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(txt_nomUsuario.Text))
+            if (string.IsNullOrWhiteSpace(txt_nombre.Text))
             {
-                MessageBox.Show("Ingrese el ID del usuario.", "ERROR");
+                MessageBox.Show("Ingrese el nombre del usuario.", "Error");
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(txt_contraseña.Text))
+            if (string.IsNullOrWhiteSpace(txt_apellido.Text))
             {
-                MessageBox.Show("Ingrese una contraseña para el usuario.", "ERROR");
+                MessageBox.Show("Ingrese el apellido del usuario.", "Error");
                 return;
             }
 
-
-            if (string.IsNullOrWhiteSpace(txt_email.Text))
+            if (string.IsNullOrWhiteSpace(txt_usuario.Text))
             {
-                MessageBox.Show("Ingrese el email del usuario.", "ERROR");
+                MessageBox.Show("Ingrese el usuario.", "Error");
+                return;
+            }
+
+            if (txt_usuario.Text.Length < 4 || txt_usuario.Text.Contains(" "))
+            {
+                MessageBox.Show("El Id de usuario debe tener al menos 4 caracteres y no contener espacios.", "Error");
                 return;
             }
 
             if (!ValidarMail(txt_email.Text))
             {
-                MessageBox.Show("Ingrese un email posible para el usuario.\nEJ: Ignaciocarignano@vitastays.com", "ERROR");
+                MessageBox.Show("Ingrese un email posible para el usuario.\nEJ: Ignaciocarignano@vitastays.com", "Error");
                 return;
             }
+
+            if (string.IsNullOrWhiteSpace(txt_contraseña.Text))
+            {
+                MessageBox.Show("Ingrese una contraseña para el usuario.", "Error");
+                return;
+            }
+
+            if (txt_contraseña.Text.Length < 6 || !txt_contraseña.Text.Any(char.IsLetter) || !txt_contraseña.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("La contraseña debe tener al menos 6 caracteres, incluyendo letras y números.", "Error");
+                return;
+            }
+
+
+
 
             #endregion
 
             if (vari == "A")
             {
-                if (!contro_us.ValidarUsuario(txt_email.Text, txt_nomUsuario.Text, 0))
+                if (!contro_us.ValidarUsuario(txt_email.Text, txt_usuario.Text, 0))
                 {
-                    usuario = contro_us.CrearUsuarioFactory(cb_tipoUsuario.Text, txt_nomUsuario.Text, txt_contraseña.Text, txt_email.Text);
+                    usuario = contro_us.CrearUsuario(cb_tipoUsuario.Text, txt_nombre.Text, txt_apellido.Text, txt_usuario.Text, txt_contraseña.Text, txt_email.Text);
 
                     try
                     {
@@ -140,7 +181,7 @@ namespace VISTA
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error al agregar el usuario: " + ex.Message, "ERROR");
+                        MessageBox.Show("Error al agregar el usuario:  " + ex.Message, "ERROR");
                     }
 
                 }
@@ -153,13 +194,25 @@ namespace VISTA
 
             if (vari == "M")
             {
-                usuario = contro_us.ListarUsuarios()[indice];
-
-                if (!contro_us.ValidarUsuario(txt_email.Text, txt_nomUsuario.Text, usuario.UsuarioId))
+                if (variF == "F")
                 {
-                    usuario.Nombre_usuario = txt_nomUsuario.Text;
-                    usuario.Contraseña = txt_contraseña.Text;
-                    usuario.Email = txt_email.Text;
+                    usuario = listaUsuariosFiltro[indice];
+                }
+                else
+                {
+                    usuario = contro_us.ListarUsuarios()[indice];
+                }
+
+                usuario.Nombre = txt_nombre.Text;
+                usuario.Apellido = txt_apellido.Text;
+                usuario.Nombre_usuario = txt_usuario.Text;
+                usuario.Contraseña = txt_contraseña.Text;
+                usuario.Email = txt_email.Text;
+
+                usuario.GrupoId = grupoSeleccionado.GrupoId;
+
+                if (!contro_us.ValidarUsuario(txt_email.Text, txt_usuario.Text, usuario.UsuarioId))
+                {
 
                     try
                     {
@@ -168,22 +221,25 @@ namespace VISTA
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Ocurrió un error en el sistema: " + ex.Message, "ERROR");
+                        MessageBox.Show("Error al modificar el usuario:  " + ex.Message, "ERROR");
                         return;
                     }
                 }
-
                 else
                 {
-                    MessageBox.Show("Este usuario ya existe\n\nIntente con otro email o nombre de usuario", "AVISO");
+                    MessageBox.Show("Este usuario ya existe\n\nIntente con otro email o usuario", "AVISO");
                     return;
                 }
 
             }
-            
-            
-
-            ARMA_GRILLA();
+            if (variF == "")
+            {
+                ARMA_GRILLA();
+            }
+            else
+            {
+                FILTRAR();
+            }
             MODO_LISTA();
             LIMPIAR();
 
@@ -219,16 +275,27 @@ namespace VISTA
         {
             if (dataGridView.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione un usuario", "Error");
+                MessageBox.Show("Seleccione un usuario.", "Error");
                 return;
             }
 
             MODELO.Usuario usuario;
             vari = "M";
 
-            usuario = contro_us.ListarUsuarios()[indice];
+            if (variF == "F")
+            {
+                usuario = listaUsuariosFiltro[indice];
+            }
+            else
+            {
+                usuario = contro_us.ListarUsuarios()[indice];
+            }
 
-            txt_nomUsuario.Text = usuario.Nombre_usuario;
+            txt_ID.Text = usuario.UsuarioId.ToString();
+            cb_tipoUsuario.Text = usuario.Grupo?.Nombre;
+            txt_nombre.Text = usuario.Nombre;
+            txt_apellido.Text = usuario.Apellido;
+            txt_usuario.Text = usuario.Nombre_usuario;
             txt_contraseña.Text = usuario.Contraseña;
             txt_email.Text = usuario.Email;
 
@@ -239,7 +306,7 @@ namespace VISTA
         {
             if (dataGridView.CurrentCell == null)
             {
-                MessageBox.Show("Seleccione un usuario", "ERROR");
+                MessageBox.Show("Seleccione un usuario.", "ERROR");
                 return;
             }
 
@@ -250,15 +317,22 @@ namespace VISTA
         {
             if (dataGridView.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione un usuario", "Error");
+                MessageBox.Show("Seleccione un usuario.", "Error");
                 return;
             }
 
             MODELO.Usuario usuario;
 
-            usuario = contro_us.ListarUsuarios()[indice];
+            if (variF == "F")
+            {
+                usuario = listaUsuariosFiltro[indice];
+            }
+            else
+            {
+                usuario = contro_us.ListarUsuarios()[indice];
+            }
 
-            DialogResult result = MessageBox.Show($"Está seguro que desea eliminar al usuario:\n\nNombre: {usuario.Nombre_usuario}\n\nEmail: {usuario.Email}", "AVISO", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show($"Está seguro que desea eliminar al usuario:\n\nNombre: {usuario.Nombre + " " + usuario.Apellido}\n\nNombre de usuario: {usuario.Nombre_usuario}\n\nEmail: {usuario.Email}\n\nGrupo: {usuario.Grupo.Nombre}", "AVISO", MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
@@ -269,18 +343,77 @@ namespace VISTA
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ocurrió un error en el sistema: " + ex.Message, "ERROR");
+                    MessageBox.Show("Ocurrió un error en el sistema:  " + ex.Message, "ERROR");
                     return;
                 }
             }
 
-            ARMA_GRILLA();
+            if (variF == "")
+            {
+                ARMA_GRILLA();
+            }
+            else
+            {
+                FILTRAR();
+            }
         }
 
         private void btn_cancelar_Click(object sender, EventArgs e)
         {
             MODO_LISTA();
             LIMPIAR();
+        }
+
+        private void btn_filtrar_Click(object sender, EventArgs e)
+        {
+            variF = "F";
+            
+            btn_quitarFiltro.Enabled = true;
+
+            FILTRAR();
+
+        }
+
+        private void btn_quitarFiltro_Click(object sender, EventArgs e)
+        {
+            cb_tipoFiltro.SelectedIndex = -1;
+            txt_nombreFiltro.Clear();
+            txt_apellidoFiltro.Clear();
+            ARMA_GRILLA();
+
+            btn_quitarFiltro.Enabled = false;
+            variF = "";
+        }
+
+        private void FILTRAR()
+        {
+            dataGridView.DataSource = null;
+
+            string tipoUsuarioFiltro = cb_tipoFiltro.Text;
+            string nombreFiltro = txt_nombreFiltro.Text.Trim().ToLower();
+            string apellidoFiltro = txt_apellidoFiltro.Text.Trim().ToLower();
+
+            listaUsuariosFiltro = contro_us.ListarUsuarios()
+                .Where(u =>
+                (string.IsNullOrEmpty(tipoUsuarioFiltro) || u.Grupo?.Nombre == tipoUsuarioFiltro) &&
+                (string.IsNullOrEmpty(nombreFiltro) || u.Nombre.ToLower().Contains(nombreFiltro)) &&
+                (string.IsNullOrEmpty(apellidoFiltro) || u.Apellido.ToLower().Contains(apellidoFiltro))
+                ).ToList();
+
+            var datosamostrar = listaUsuariosFiltro
+            .Select(u => new
+            {
+                u.UsuarioId,
+                Nombre = u.Nombre + " " + u.Apellido,
+                Nombre_de_usuario = u.Nombre_usuario,
+                u.Email,
+                u.GrupoId,
+                Grupo = u.Grupo?.Nombre ?? "Sin grupo"
+
+            }).ToList();
+
+            dataGridView.DataSource = datosamostrar;
+
         }
     }
 }

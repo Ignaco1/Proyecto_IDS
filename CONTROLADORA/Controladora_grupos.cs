@@ -45,17 +45,6 @@ namespace CONTROLADORA
             }
         }
 
-        public ReadOnlyCollection<Grupo> ListarGruposConPermisos()
-        {
-            using (var context = new Context())
-            {
-                return context.Grupos
-                    .Include(g => g.Permisos)
-                    .ToList()
-                    .AsReadOnly();
-            }
-        }
-
         public Grupo CrearGrupos(string nombre)
         {
             Grupo grupo = new Grupo();
@@ -190,6 +179,16 @@ namespace CONTROLADORA
                 {
                     return "Ocurrio un error en el sistema:  " + ex.Message;
                 }
+
+
+            }
+        }
+
+        public Grupo ObtenerGrupoPorNombre(string nombre)
+        {
+            using (var context = new Context())
+            {
+                return context.Grupos.Include(g => g.Permisos).FirstOrDefault(g => g.Nombre == nombre);
             }
         }
 

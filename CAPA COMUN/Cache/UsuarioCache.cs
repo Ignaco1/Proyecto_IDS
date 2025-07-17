@@ -11,6 +11,7 @@ namespace CAPA_COMUN.Cache
         public static int UsuarioId { get; set; }
         public static string UsuarioNombre { get; set; }
         public static string UsuarioEmail { get; set; }
-        public static string UsuarioAcceso { get; set; }
+        public static string UsuarioTipo { get; set; }
+
     }
 }
