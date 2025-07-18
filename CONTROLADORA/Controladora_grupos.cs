@@ -71,22 +71,41 @@ namespace CONTROLADORA
             }
         }
 
-        public string ModificarGrupo(Grupo grupo)
+        public string ModificarGrupo(Grupo grupoModificado)
         {
             using (var context = new Context())
             {
                 try
                 {
-                    context.Grupos.Update(grupo);
+                    var grupoExistente = context.Grupos
+                        .Include(g => g.Permisos)
+                        .FirstOrDefault(g => g.GrupoId == grupoModificado.GrupoId);
+
+                    if (grupoExistente == null)
+                        return "El grupo no existe.";
+
+                    grupoExistente.Nombre = grupoModificado.Nombre;
+
+                    grupoExistente.Permisos.Clear();
+
+                    foreach (var permiso in grupoModificado.Permisos)
+                    {
+                        var permisoExistente = context.Permisos.Find(permiso.PermisoId);
+                        if (permisoExistente != null)
+                        {
+                            grupoExistente.Permisos.Add(permisoExistente);
+                        }
+                    }
+
                     context.SaveChanges();
                     return "Grupo modificado con éxito.";
                 }
                 catch (Exception ex)
                 {
-                    return "Ocurrio un error en el sistema:  " + ex.Message;
+                    return "Ocurrió un error en el sistema: " + ex.Message;
                 }
-            }
 
+            }
         }
 
         public string EliminarGrupo(Grupo grupo)

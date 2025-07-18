@@ -184,6 +184,11 @@ namespace VISTA
         {
             AbrirForms(new Form_gestionarPermisos());
         }
+
+        private void btn_ABM_clientes_Click(object sender, EventArgs e)
+        {
+            AbrirForms(new Form_clientes_abm());
+        }
     }
 }
 

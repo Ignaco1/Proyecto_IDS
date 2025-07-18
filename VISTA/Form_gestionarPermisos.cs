@@ -154,7 +154,6 @@ namespace VISTA
 
                 if (!contro_per.ValidarPermisoModificado(permiso))
                 {
-
                     try
                     {
                         string respuesta = contro_per.ModificarPermiso(permiso);

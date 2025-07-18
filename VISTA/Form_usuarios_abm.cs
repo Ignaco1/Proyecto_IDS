@@ -58,7 +58,6 @@ namespace VISTA
                 Nombre = u.Nombre + " " + u.Apellido,
                 Nombre_de_usuario = u.Nombre_usuario,
                 u.Email,
-                u.GrupoId,
                 Grupo = u.Grupo?.Nombre ?? "Sin grupo"
 
             }).ToList();
@@ -242,6 +241,7 @@ namespace VISTA
             }
             MODO_LISTA();
             LIMPIAR();
+            txt_contraseña.Enabled = true;
 
         }
 
@@ -291,15 +291,16 @@ namespace VISTA
                 usuario = contro_us.ListarUsuarios()[indice];
             }
 
-            txt_ID.Text = usuario.UsuarioId.ToString();
             cb_tipoUsuario.Text = usuario.Grupo?.Nombre;
             txt_nombre.Text = usuario.Nombre;
             txt_apellido.Text = usuario.Apellido;
             txt_usuario.Text = usuario.Nombre_usuario;
-            txt_contraseña.Text = usuario.Contraseña;
             txt_email.Text = usuario.Email;
 
+            txt_contraseña.Enabled = false;
+
             MODO_CARGA();
+
         }
 
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -343,7 +344,7 @@ namespace VISTA
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ocurrió un error en el sistema:  " + ex.Message, "ERROR");
+                    MessageBox.Show("Error al eliminar el usuario:  " + ex.Message, "ERROR");
                     return;
                 }
             }

@@ -72,22 +72,44 @@ namespace CONTROLADORA
             }
         }
 
-        public string ModificarPermiso(Permiso permiso)
+        public string ModificarPermiso(Permiso permisoModificado)
         {
             using (var context = new Context())
             {
                 try
                 {
-                    context.Update(permiso);
+                    var permisoExistente = context.Permisos
+                        .Include(p => p.Grupos)
+                        .FirstOrDefault(p => p.PermisoId == permisoModificado.PermisoId);
+
+                    if (permisoExistente == null)
+                        return "El permiso no existe.";
+
+
+                    permisoExistente.Nombre = permisoModificado.Nombre;
+
+
+                    permisoExistente.Grupos.Clear();
+
+
+                    foreach (var grupo in permisoModificado.Grupos)
+                    {
+                        var grupoExistente = context.Grupos.Find(grupo.GrupoId);
+                        if (grupoExistente != null)
+                        {
+                            permisoExistente.Grupos.Add(grupoExistente);
+                        }
+                    }
+
                     context.SaveChanges();
-                    return "Permiso modificado con exito";
+                    return "Permiso modificado con éxito.";
                 }
                 catch (Exception ex)
                 {
                     return "Ocurrió un error en el sistema: " + ex.Message;
                 }
-            }
 
+            }
         }
 
         public string EliminarPermiso(Permiso permiso)

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,11 +40,12 @@ namespace CONTROLADORA
 
         }
 
-        public Cliente CrearCliente(string nombre, string dni, string email, string telefono)
+        public Cliente CrearCliente(string nombre,string apellido, string dni, string email, string telefono)
         {
             Cliente cliente = new Cliente();
 
             cliente.Nombre = nombre;
+            cliente.Apellido = apellido;
             cliente.Dni = dni;
             cliente.Email = email;
             cliente.Telefono = telefono;
@@ -105,9 +107,25 @@ namespace CONTROLADORA
                 {
                     return "Ocurrio un error en el sistema:  " + ex.Message;
                 }
-            }
+            }            
+        }
 
-            
+        public bool ValidaCliente(string dni, string email, int id)
+        {
+            using (var context = new Context())
+            {
+                var clientes = context.Clientes.ToList();
+
+                foreach (var cliente in clientes)
+                {
+                    if ((cliente.Dni == dni || cliente.Email == email) && cliente.ClienteId != id)
+                    {
+                        return true; 
+                    }
+                }
+
+                return false; 
+            }
         }
     }
 }

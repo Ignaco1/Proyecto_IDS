@@ -211,6 +211,7 @@
             btn_ABM_clientes.Text = "ABM de Clientes";
             btn_ABM_clientes.TextAlign = ContentAlignment.MiddleLeft;
             btn_ABM_clientes.UseVisualStyleBackColor = true;
+            btn_ABM_clientes.Click += btn_ABM_clientes_Click;
             // 
             // btn_ABM_usuarios
             // 
