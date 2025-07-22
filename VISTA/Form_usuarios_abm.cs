@@ -144,11 +144,11 @@ namespace VISTA
                 return;
             }
 
-            if (!ValidarMail(txt_email.Text))
-            {
-                MessageBox.Show("Ingrese un email posible para el usuario.\nEJ: Ignaciocarignano@vitastays.com", "Error");
-                return;
-            }
+            //if (!ValidarMail(txt_email.Text))
+            //{
+            //    MessageBox.Show("Ingrese un email posible para el usuario.\nEJ: Ignaciocarignano@vitastays.com", "Error");
+            //    return;
+            //}
 
             if (string.IsNullOrWhiteSpace(txt_contraseña.Text))
             {
@@ -297,7 +297,8 @@ namespace VISTA
             txt_usuario.Text = usuario.Nombre_usuario;
             txt_email.Text = usuario.Email;
 
-            txt_contraseña.Enabled = false;
+            txt_contraseña.Text = usuario.Contraseña;
+            //txt_contraseña.Enabled = false;
 
             MODO_CARGA();
 

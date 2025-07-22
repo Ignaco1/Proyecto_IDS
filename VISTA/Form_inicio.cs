@@ -98,6 +98,12 @@ namespace VISTA
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
+        private void label1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
         private void btn_ver_Click(object sender, EventArgs e)
         {
             txt_contra.UseSystemPasswordChar = false;
@@ -125,6 +131,7 @@ namespace VISTA
             else if (txt_contra.Text == "CONTRASEÑA")
             {
                 MostrarError("Por favor, ingrese la contraseña.");
+
             }
             else
             {
@@ -132,10 +139,14 @@ namespace VISTA
 
                 if (usuario != null)
                 {
-                    
+
                     UsuarioCache.UsuarioId = usuario.UsuarioId;
-                    UsuarioCache.UsuarioNombre = usuario.Nombre_usuario;
+                    UsuarioCache.UsuarioNombre = usuario.Nombre;
+                    UsuarioCache.UsuarioApellido = usuario.Apellido;
+                    UsuarioCache.UsuarioNombre_usuario = usuario.Nombre_usuario;
                     UsuarioCache.UsuarioEmail = usuario.Email;
+                    UsuarioCache.UsuarioGrupoNombre = usuario.Grupo.Nombre;
+                    UsuarioCache.Permisos = usuario.Grupo.Permisos.Select(p => p.Nombre).ToList();
 
 
                     Form_principal form_principal = new Form_principal();
@@ -151,7 +162,7 @@ namespace VISTA
                     txt_usuario.Text = "USUARIO";
                     txt_contra.UseSystemPasswordChar = false;
                 }
-                
+
             }
 
 
@@ -172,7 +183,17 @@ namespace VISTA
             pictureBox_error.Visible = false;
             txt_contra.UseSystemPasswordChar = false;
             this.Show();
-            
+
         }
+
+        private void lbl_contra_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Form_recuperarContraseña form_recuperar = new Form_recuperarContraseña();
+            form_recuperar.Show();
+            form_recuperar.FormClosed += CerraSesion;
+
+            this.Hide();
+        }
+
     }
 }

@@ -9,6 +9,9 @@ using CAPA_COMUN;
 using CAPA_COMUN.Cache;
 using MODELO.Composite;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using CONTROLADORA.Utilidades;
+using CONTROLADORA.ServiciosCorreo;
 
 namespace CONTROLADORA
 {
@@ -140,9 +143,11 @@ namespace CONTROLADORA
 
         public Usuario ValidarLogin(string Nombre_usuario, string Contra)
         {
+            string contraseñaEncriptada = SeguridadUtilidades.EncriptarSHA256(Contra);
+            
             using (var context = new Context())
             {
-                var usuario = context.Usuarios.FirstOrDefault(u => u.Nombre_usuario == Nombre_usuario && u.Contraseña == Contra);
+                var usuario = context.Usuarios.Include(u => u.Grupo).ThenInclude(g => g.Permisos).FirstOrDefault(u => u.Nombre_usuario == Nombre_usuario && u.Contraseña == contraseñaEncriptada);
 
                 if (usuario == null)
                     return null;
@@ -169,6 +174,54 @@ namespace CONTROLADORA
             }
 
         }
+
+        public bool ValidarUsuarioRecuperacion(string email, string usuNom)
+        {
+            using (var context = new Context())
+            {
+                return context.Usuarios.Any(u => u.Email.ToUpper() == email.ToUpper() && u.Nombre_usuario.ToUpper() == usuNom.ToUpper());
+                ;
+            }
+
+        }
+
+        public string RecuperarContraseña(string nombre_usuario, string email)
+        {
+            using (var context = new Context())
+            {
+                var usuario = context.Usuarios.FirstOrDefault(u =>u.Nombre_usuario == nombre_usuario && u.Email == email);
+
+                if (usuario == null)
+                    return "El usuario o email no están registrados correctamente.";
+
+                string nuevaContraseña = SeguridadUtilidades.GenerarContraseñaAleatoria();
+
+                string contraseñaEncriptada = SeguridadUtilidades.EncriptarSHA256(nuevaContraseña);
+               
+                usuario.Contraseña = contraseñaEncriptada;
+
+                context.SaveChanges();
+
+                try
+                {
+                    var mailService = new ServicioCorreoSistema();
+                    string asunto = "Contraseña temporal generada - VitaStays";
+                    string mensaje = $"Hola {usuario.Nombre} {usuario.Apellido},\n\n" +
+                                     $"Tu nueva contraseña temporal es: {nuevaContraseña}\n\n" +
+                                     $"Una vez iniciado sesion en el sistema, debes cambiar la contraseña.";
+
+                    mailService.EnviarCorreo(asunto, mensaje, new List<string> { usuario.Email });
+
+                    return "Nueva contraseña enviada correctamente. Verifique su bandeja de entrada.";
+                }
+                catch (Exception ex)
+                {
+                    return "Error al enviar el correo:  " + ex.Message;
+                }
+            }
+
+        }
+
 
     }
 }

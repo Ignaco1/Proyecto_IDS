@@ -66,6 +66,7 @@
             // 
             // pictureBox3
             // 
+            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
             pictureBox3.Location = new Point(35, 56);
             pictureBox3.Name = "pictureBox3";
@@ -130,6 +131,7 @@
             label1.Size = new Size(100, 33);
             label1.TabIndex = 4;
             label1.Text = "LOGIN";
+            label1.MouseDown += label1_MouseDown;
             // 
             // btn_acceder
             // 
@@ -160,6 +162,7 @@
             lbl_contra.TabIndex = 0;
             lbl_contra.TabStop = true;
             lbl_contra.Text = "¿Has olvidado tu contraseña?";
+            lbl_contra.LinkClicked += lbl_contra_LinkClicked;
             // 
             // btn_cerrar
             // 

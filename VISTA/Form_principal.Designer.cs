@@ -47,9 +47,10 @@
             btn_seguridad = new Button();
             btn_cerrarSesion = new PictureBox();
             panel_logo = new Panel();
+            lbl_usuario = new Label();
             lb_nombre = new Label();
             lb_email = new Label();
-            lb_posicion = new Label();
+            lb_grupo = new Label();
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
             btn_restaurar = new PictureBox();
@@ -90,7 +91,7 @@
             panel_menuLateral.Dock = DockStyle.Left;
             panel_menuLateral.Location = new Point(0, 0);
             panel_menuLateral.Name = "panel_menuLateral";
-            panel_menuLateral.Size = new Size(275, 702);
+            panel_menuLateral.Size = new Size(283, 702);
             panel_menuLateral.TabIndex = 0;
             panel_menuLateral.MouseDown += panel_menuLateral_MouseDown;
             // 
@@ -100,11 +101,12 @@
             btn_informes.FlatAppearance.BorderSize = 0;
             btn_informes.FlatStyle = FlatStyle.Flat;
             btn_informes.ForeColor = Color.Gainsboro;
-            btn_informes.Location = new Point(0, 426);
+            btn_informes.Location = new Point(0, 450);
             btn_informes.Name = "btn_informes";
             btn_informes.Padding = new Padding(10, 0, 0, 0);
-            btn_informes.Size = new Size(275, 30);
+            btn_informes.Size = new Size(283, 30);
             btn_informes.TabIndex = 20;
+            btn_informes.Tag = "Informes";
             btn_informes.Text = "Informes";
             btn_informes.TextAlign = ContentAlignment.MiddleLeft;
             btn_informes.UseVisualStyleBackColor = true;
@@ -116,9 +118,9 @@
             panel_reservas.Controls.Add(btn_ver_reservas);
             panel_reservas.Controls.Add(btn_realizar_alquilar);
             panel_reservas.Dock = DockStyle.Top;
-            panel_reservas.Location = new Point(0, 366);
+            panel_reservas.Location = new Point(0, 390);
             panel_reservas.Name = "panel_reservas";
-            panel_reservas.Size = new Size(275, 60);
+            panel_reservas.Size = new Size(283, 60);
             panel_reservas.TabIndex = 19;
             // 
             // btn_ver_reservas
@@ -131,8 +133,9 @@
             btn_ver_reservas.Location = new Point(0, 30);
             btn_ver_reservas.Name = "btn_ver_reservas";
             btn_ver_reservas.Padding = new Padding(35, 0, 0, 0);
-            btn_ver_reservas.Size = new Size(275, 30);
+            btn_ver_reservas.Size = new Size(283, 30);
             btn_ver_reservas.TabIndex = 4;
+            btn_ver_reservas.Tag = "Ver reservas";
             btn_ver_reservas.Text = "Ver reservas";
             btn_ver_reservas.TextAlign = ContentAlignment.MiddleLeft;
             btn_ver_reservas.UseVisualStyleBackColor = false;
@@ -147,8 +150,9 @@
             btn_realizar_alquilar.Location = new Point(0, 0);
             btn_realizar_alquilar.Name = "btn_realizar_alquilar";
             btn_realizar_alquilar.Padding = new Padding(35, 0, 0, 0);
-            btn_realizar_alquilar.Size = new Size(275, 30);
+            btn_realizar_alquilar.Size = new Size(283, 30);
             btn_realizar_alquilar.TabIndex = 3;
+            btn_realizar_alquilar.Tag = "Realizar alquiler";
             btn_realizar_alquilar.Text = "Realizar alquiler";
             btn_realizar_alquilar.TextAlign = ContentAlignment.MiddleLeft;
             btn_realizar_alquilar.UseVisualStyleBackColor = false;
@@ -160,11 +164,12 @@
             btn_cabañas_alquiler.FlatAppearance.BorderSize = 0;
             btn_cabañas_alquiler.FlatStyle = FlatStyle.Flat;
             btn_cabañas_alquiler.ForeColor = Color.Gainsboro;
-            btn_cabañas_alquiler.Location = new Point(0, 336);
+            btn_cabañas_alquiler.Location = new Point(0, 360);
             btn_cabañas_alquiler.Name = "btn_cabañas_alquiler";
             btn_cabañas_alquiler.Padding = new Padding(10, 0, 0, 0);
-            btn_cabañas_alquiler.Size = new Size(275, 30);
+            btn_cabañas_alquiler.Size = new Size(283, 30);
             btn_cabañas_alquiler.TabIndex = 18;
+            btn_cabañas_alquiler.Tag = "Cabañas y alquiler";
             btn_cabañas_alquiler.Text = "Cabañas y alquiler";
             btn_cabañas_alquiler.TextAlign = ContentAlignment.MiddleLeft;
             btn_cabañas_alquiler.UseVisualStyleBackColor = true;
@@ -177,9 +182,9 @@
             panel_ABM.Controls.Add(btn_ABM_clientes);
             panel_ABM.Controls.Add(btn_ABM_usuarios);
             panel_ABM.Dock = DockStyle.Top;
-            panel_ABM.Location = new Point(0, 247);
+            panel_ABM.Location = new Point(0, 271);
             panel_ABM.Name = "panel_ABM";
-            panel_ABM.Size = new Size(275, 89);
+            panel_ABM.Size = new Size(283, 89);
             panel_ABM.TabIndex = 17;
             // 
             // btn_ABM_cabañas
@@ -191,8 +196,9 @@
             btn_ABM_cabañas.Location = new Point(0, 60);
             btn_ABM_cabañas.Name = "btn_ABM_cabañas";
             btn_ABM_cabañas.Padding = new Padding(35, 0, 0, 0);
-            btn_ABM_cabañas.Size = new Size(275, 30);
+            btn_ABM_cabañas.Size = new Size(283, 30);
             btn_ABM_cabañas.TabIndex = 2;
+            btn_ABM_cabañas.Tag = "ABM de Cabañas";
             btn_ABM_cabañas.Text = "ABM de Cabañas";
             btn_ABM_cabañas.TextAlign = ContentAlignment.MiddleLeft;
             btn_ABM_cabañas.UseVisualStyleBackColor = true;
@@ -206,8 +212,9 @@
             btn_ABM_clientes.Location = new Point(0, 30);
             btn_ABM_clientes.Name = "btn_ABM_clientes";
             btn_ABM_clientes.Padding = new Padding(35, 0, 0, 0);
-            btn_ABM_clientes.Size = new Size(275, 30);
+            btn_ABM_clientes.Size = new Size(283, 30);
             btn_ABM_clientes.TabIndex = 1;
+            btn_ABM_clientes.Tag = "ABM de Clientes";
             btn_ABM_clientes.Text = "ABM de Clientes";
             btn_ABM_clientes.TextAlign = ContentAlignment.MiddleLeft;
             btn_ABM_clientes.UseVisualStyleBackColor = true;
@@ -222,8 +229,9 @@
             btn_ABM_usuarios.Location = new Point(0, 0);
             btn_ABM_usuarios.Name = "btn_ABM_usuarios";
             btn_ABM_usuarios.Padding = new Padding(35, 0, 0, 0);
-            btn_ABM_usuarios.Size = new Size(275, 30);
+            btn_ABM_usuarios.Size = new Size(283, 30);
             btn_ABM_usuarios.TabIndex = 0;
+            btn_ABM_usuarios.Tag = "ABM de Usuarios";
             btn_ABM_usuarios.Text = "ABM de Usuarios";
             btn_ABM_usuarios.TextAlign = ContentAlignment.MiddleLeft;
             btn_ABM_usuarios.UseVisualStyleBackColor = true;
@@ -235,11 +243,12 @@
             btn_ABM.FlatAppearance.BorderSize = 0;
             btn_ABM.FlatStyle = FlatStyle.Flat;
             btn_ABM.ForeColor = Color.Gainsboro;
-            btn_ABM.Location = new Point(0, 217);
+            btn_ABM.Location = new Point(0, 241);
             btn_ABM.Name = "btn_ABM";
             btn_ABM.Padding = new Padding(10, 0, 0, 0);
-            btn_ABM.Size = new Size(275, 30);
+            btn_ABM.Size = new Size(283, 30);
             btn_ABM.TabIndex = 16;
+            btn_ABM.Tag = "ABM";
             btn_ABM.Text = "ABM";
             btn_ABM.TextAlign = ContentAlignment.MiddleLeft;
             btn_ABM.UseVisualStyleBackColor = true;
@@ -252,9 +261,9 @@
             panel_seguridad.Controls.Add(btn_gestionar_grupos);
             panel_seguridad.Controls.Add(btn_gestionar_permisos);
             panel_seguridad.Dock = DockStyle.Top;
-            panel_seguridad.Location = new Point(0, 126);
+            panel_seguridad.Location = new Point(0, 150);
             panel_seguridad.Name = "panel_seguridad";
-            panel_seguridad.Size = new Size(275, 91);
+            panel_seguridad.Size = new Size(283, 91);
             panel_seguridad.TabIndex = 7;
             // 
             // btn_asignarPermisos
@@ -267,8 +276,9 @@
             btn_asignarPermisos.Location = new Point(0, 60);
             btn_asignarPermisos.Name = "btn_asignarPermisos";
             btn_asignarPermisos.Padding = new Padding(35, 0, 0, 0);
-            btn_asignarPermisos.Size = new Size(275, 30);
+            btn_asignarPermisos.Size = new Size(283, 30);
             btn_asignarPermisos.TabIndex = 2;
+            btn_asignarPermisos.Tag = "Asignar permisos";
             btn_asignarPermisos.Text = "Asignar permisos";
             btn_asignarPermisos.TextAlign = ContentAlignment.MiddleLeft;
             btn_asignarPermisos.UseVisualStyleBackColor = false;
@@ -284,8 +294,9 @@
             btn_gestionar_grupos.Location = new Point(0, 30);
             btn_gestionar_grupos.Name = "btn_gestionar_grupos";
             btn_gestionar_grupos.Padding = new Padding(35, 0, 0, 0);
-            btn_gestionar_grupos.Size = new Size(275, 30);
+            btn_gestionar_grupos.Size = new Size(283, 30);
             btn_gestionar_grupos.TabIndex = 1;
+            btn_gestionar_grupos.Tag = "Gestionar grupos";
             btn_gestionar_grupos.Text = "Gestionar grupos";
             btn_gestionar_grupos.TextAlign = ContentAlignment.MiddleLeft;
             btn_gestionar_grupos.UseVisualStyleBackColor = false;
@@ -301,8 +312,9 @@
             btn_gestionar_permisos.Location = new Point(0, 0);
             btn_gestionar_permisos.Name = "btn_gestionar_permisos";
             btn_gestionar_permisos.Padding = new Padding(35, 0, 0, 0);
-            btn_gestionar_permisos.Size = new Size(275, 30);
+            btn_gestionar_permisos.Size = new Size(283, 30);
             btn_gestionar_permisos.TabIndex = 0;
+            btn_gestionar_permisos.Tag = "Gestionar permisos";
             btn_gestionar_permisos.Text = "Gestionar permisos";
             btn_gestionar_permisos.TextAlign = ContentAlignment.MiddleLeft;
             btn_gestionar_permisos.UseVisualStyleBackColor = false;
@@ -314,11 +326,12 @@
             btn_seguridad.FlatAppearance.BorderSize = 0;
             btn_seguridad.FlatStyle = FlatStyle.Flat;
             btn_seguridad.ForeColor = Color.Gainsboro;
-            btn_seguridad.Location = new Point(0, 96);
+            btn_seguridad.Location = new Point(0, 120);
             btn_seguridad.Name = "btn_seguridad";
             btn_seguridad.Padding = new Padding(10, 0, 0, 0);
-            btn_seguridad.Size = new Size(275, 30);
+            btn_seguridad.Size = new Size(283, 30);
             btn_seguridad.TabIndex = 6;
+            btn_seguridad.Tag = "Seguridad";
             btn_seguridad.Text = "Seguridad";
             btn_seguridad.TextAlign = ContentAlignment.MiddleLeft;
             btn_seguridad.UseVisualStyleBackColor = true;
@@ -338,22 +351,34 @@
             // 
             // panel_logo
             // 
+            panel_logo.Controls.Add(lbl_usuario);
             panel_logo.Controls.Add(lb_nombre);
             panel_logo.Controls.Add(lb_email);
-            panel_logo.Controls.Add(lb_posicion);
+            panel_logo.Controls.Add(lb_grupo);
             panel_logo.Controls.Add(pictureBox1);
             panel_logo.Dock = DockStyle.Top;
             panel_logo.Location = new Point(0, 0);
             panel_logo.Name = "panel_logo";
-            panel_logo.Size = new Size(275, 96);
+            panel_logo.Size = new Size(283, 120);
             panel_logo.TabIndex = 0;
+            // 
+            // lbl_usuario
+            // 
+            lbl_usuario.AutoSize = true;
+            lbl_usuario.FlatStyle = FlatStyle.Flat;
+            lbl_usuario.ForeColor = Color.SlateBlue;
+            lbl_usuario.Location = new Point(101, 66);
+            lbl_usuario.Name = "lbl_usuario";
+            lbl_usuario.Size = new Size(47, 15);
+            lbl_usuario.TabIndex = 4;
+            lbl_usuario.Text = "Usuario";
             // 
             // lb_nombre
             // 
             lb_nombre.AutoSize = true;
             lb_nombre.FlatStyle = FlatStyle.Flat;
             lb_nombre.ForeColor = Color.SlateBlue;
-            lb_nombre.Location = new Point(95, 39);
+            lb_nombre.Location = new Point(101, 9);
             lb_nombre.Name = "lb_nombre";
             lb_nombre.Size = new Size(51, 15);
             lb_nombre.TabIndex = 3;
@@ -364,27 +389,27 @@
             lb_email.AutoSize = true;
             lb_email.FlatStyle = FlatStyle.Flat;
             lb_email.ForeColor = Color.SlateBlue;
-            lb_email.Location = new Point(95, 65);
+            lb_email.Location = new Point(101, 93);
             lb_email.Name = "lb_email";
             lb_email.Size = new Size(36, 15);
             lb_email.TabIndex = 2;
             lb_email.Text = "Email";
             // 
-            // lb_posicion
+            // lb_grupo
             // 
-            lb_posicion.AutoSize = true;
-            lb_posicion.FlatStyle = FlatStyle.Flat;
-            lb_posicion.ForeColor = Color.SlateBlue;
-            lb_posicion.Location = new Point(95, 12);
-            lb_posicion.Name = "lb_posicion";
-            lb_posicion.Size = new Size(52, 15);
-            lb_posicion.TabIndex = 1;
-            lb_posicion.Text = "Posicion";
+            lb_grupo.AutoSize = true;
+            lb_grupo.FlatStyle = FlatStyle.Flat;
+            lb_grupo.ForeColor = Color.SlateBlue;
+            lb_grupo.Location = new Point(101, 37);
+            lb_grupo.Name = "lb_grupo";
+            lb_grupo.Size = new Size(52, 15);
+            lb_grupo.TabIndex = 1;
+            lb_grupo.Text = "Posicion";
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Location = new Point(12, 27);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(77, 68);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -399,9 +424,9 @@
             panel1.Controls.Add(btn_minimizar);
             panel1.Controls.Add(btn_cerrar);
             panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(275, 0);
+            panel1.Location = new Point(283, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1172, 37);
+            panel1.Size = new Size(1164, 37);
             panel1.TabIndex = 1;
             panel1.MouseDown += panel1_MouseDown;
             // 
@@ -409,7 +434,7 @@
             // 
             btn_restaurar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_restaurar.Image = (Image)resources.GetObject("btn_restaurar.Image");
-            btn_restaurar.Location = new Point(1112, 3);
+            btn_restaurar.Location = new Point(1104, 3);
             btn_restaurar.Name = "btn_restaurar";
             btn_restaurar.Size = new Size(30, 30);
             btn_restaurar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -421,7 +446,7 @@
             // 
             btn_maximizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_maximizar.Image = (Image)resources.GetObject("btn_maximizar.Image");
-            btn_maximizar.Location = new Point(1112, 3);
+            btn_maximizar.Location = new Point(1104, 3);
             btn_maximizar.Name = "btn_maximizar";
             btn_maximizar.Size = new Size(30, 30);
             btn_maximizar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -433,7 +458,7 @@
             // 
             btn_minimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_minimizar.Image = (Image)resources.GetObject("btn_minimizar.Image");
-            btn_minimizar.Location = new Point(1085, 3);
+            btn_minimizar.Location = new Point(1077, 3);
             btn_minimizar.Name = "btn_minimizar";
             btn_minimizar.Size = new Size(30, 30);
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -445,7 +470,7 @@
             // 
             btn_cerrar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_cerrar.Image = (Image)resources.GetObject("btn_cerrar.Image");
-            btn_cerrar.Location = new Point(1139, 3);
+            btn_cerrar.Location = new Point(1131, 3);
             btn_cerrar.Name = "btn_cerrar";
             btn_cerrar.Size = new Size(30, 30);
             btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -458,9 +483,9 @@
             panel_forms.BackColor = Color.FromArgb(32, 30, 45);
             panel_forms.Controls.Add(pictureBox2);
             panel_forms.Dock = DockStyle.Fill;
-            panel_forms.Location = new Point(275, 37);
+            panel_forms.Location = new Point(283, 37);
             panel_forms.Name = "panel_forms";
-            panel_forms.Size = new Size(1172, 665);
+            panel_forms.Size = new Size(1164, 665);
             panel_forms.TabIndex = 2;
             panel_forms.MouseDown += panel_forms_MouseDown;
             // 
@@ -468,7 +493,7 @@
             // 
             pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(427, 187);
+            pictureBox2.Location = new Point(423, 187);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(335, 239);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -519,7 +544,7 @@
         private PictureBox btn_maximizar;
         private PictureBox btn_restaurar;
         private PictureBox btn_cerrarSesion;
-        private Label lb_posicion;
+        private Label lb_grupo;
         private Label lb_nombre;
         private Label lb_email;
         private Button btn_seguridad;
@@ -537,5 +562,6 @@
         private Button btn_ver_reservas;
         private Button btn_asignarPermisos;
         private Button btn_gestionar_grupos;
+        private Label lbl_usuario;
     }
 }

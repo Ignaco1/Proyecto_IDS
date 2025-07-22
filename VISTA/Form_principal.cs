@@ -70,6 +70,27 @@ namespace VISTA
             }
         }
 
+        private void HabilitarBotones(Control padres)
+        {
+            foreach (Control control in padres.Controls)
+            {
+                if (control is Button boton && boton.Tag != null)
+                {
+                    string permisos = boton.Tag.ToString();
+
+                    boton.Enabled = UsuarioCache.Permisos.Any(p => p.Equals(permisos, StringComparison.OrdinalIgnoreCase));
+                    boton.Visible = UsuarioCache.Permisos.Any(p => p.Equals(permisos, StringComparison.OrdinalIgnoreCase));
+                }
+
+                if (control.HasChildren)
+                {
+                    HabilitarBotones(control);
+                }
+
+            }
+
+        }
+
         private void btn_minimizar_Click_1(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -113,12 +134,15 @@ namespace VISTA
         private void Form_principal_Load(object sender, EventArgs e)
         {
             CargarLabels();
+            HabilitarBotones(this);
         }
 
         private void CargarLabels()
         {
-            lb_nombre.Text = UsuarioCache.UsuarioNombre;
+            lb_nombre.Text = UsuarioCache.UsuarioNombre + " " + UsuarioCache.UsuarioApellido;
             lb_email.Text = UsuarioCache.UsuarioEmail;
+            lbl_usuario.Text = UsuarioCache.UsuarioNombre_usuario;
+            lb_grupo.Text = UsuarioCache.UsuarioGrupoNombre;
         }
 
 
@@ -152,7 +176,7 @@ namespace VISTA
 
         private void btn_cerrarSesion_Click(object sender, EventArgs e)
         {
-            var resultado = MessageBox.Show("Esta seguro que desea cerrar sesión?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var resultado = MessageBox.Show("Esta seguro que desea cerrar sesión?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (resultado == DialogResult.Yes)
             {
                 this.Close();
@@ -189,6 +213,8 @@ namespace VISTA
         {
             AbrirForms(new Form_clientes_abm());
         }
+
+
     }
 }
 
