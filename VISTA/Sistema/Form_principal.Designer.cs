@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_principal));
             panel_menuLateral = new Panel();
+            btn_ajustes = new PictureBox();
             btn_informes = new Button();
             panel_reservas = new Panel();
             btn_ver_reservas = new Button();
@@ -60,6 +61,7 @@
             panel_forms = new Panel();
             pictureBox2 = new PictureBox();
             panel_menuLateral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)btn_ajustes).BeginInit();
             panel_reservas.SuspendLayout();
             panel_ABM.SuspendLayout();
             panel_seguridad.SuspendLayout();
@@ -79,6 +81,7 @@
             // 
             panel_menuLateral.AutoScroll = true;
             panel_menuLateral.BackColor = Color.FromArgb(11, 7, 17);
+            panel_menuLateral.Controls.Add(btn_ajustes);
             panel_menuLateral.Controls.Add(btn_informes);
             panel_menuLateral.Controls.Add(panel_reservas);
             panel_menuLateral.Controls.Add(btn_cabañas_alquiler);
@@ -94,6 +97,18 @@
             panel_menuLateral.Size = new Size(283, 702);
             panel_menuLateral.TabIndex = 0;
             panel_menuLateral.MouseDown += panel_menuLateral_MouseDown;
+            // 
+            // btn_ajustes
+            // 
+            btn_ajustes.Anchor = AnchorStyles.Bottom;
+            btn_ajustes.Image = (Image)resources.GetObject("btn_ajustes.Image");
+            btn_ajustes.Location = new Point(3, 592);
+            btn_ajustes.Name = "btn_ajustes";
+            btn_ajustes.Size = new Size(114, 54);
+            btn_ajustes.SizeMode = PictureBoxSizeMode.Zoom;
+            btn_ajustes.TabIndex = 21;
+            btn_ajustes.TabStop = false;
+            btn_ajustes.Click += btn_ajustes_Click;
             // 
             // btn_informes
             // 
@@ -341,9 +356,9 @@
             // 
             btn_cerrarSesion.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btn_cerrarSesion.Image = (Image)resources.GetObject("btn_cerrarSesion.Image");
-            btn_cerrarSesion.Location = new Point(3, 631);
+            btn_cerrarSesion.Location = new Point(0, 646);
             btn_cerrarSesion.Name = "btn_cerrarSesion";
-            btn_cerrarSesion.Size = new Size(134, 68);
+            btn_cerrarSesion.Size = new Size(114, 56);
             btn_cerrarSesion.SizeMode = PictureBoxSizeMode.Zoom;
             btn_cerrarSesion.TabIndex = 5;
             btn_cerrarSesion.TabStop = false;
@@ -514,6 +529,7 @@
             Text = "Form_principal";
             Load += Form_principal_Load;
             panel_menuLateral.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)btn_ajustes).EndInit();
             panel_reservas.ResumeLayout(false);
             panel_ABM.ResumeLayout(false);
             panel_seguridad.ResumeLayout(false);
@@ -563,5 +579,6 @@
         private Button btn_asignarPermisos;
         private Button btn_gestionar_grupos;
         private Label lbl_usuario;
+        private PictureBox btn_ajustes;
     }
 }

@@ -35,4 +35,9 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Cabañas y alquiler\" />
+    <Folder Include="Informes\" />
+  </ItemGroup>
+
 </Project>

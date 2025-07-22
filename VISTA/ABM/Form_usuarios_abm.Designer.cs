@@ -30,8 +30,6 @@
         {
             panel_carga = new Panel();
             groupBox_carga = new GroupBox();
-            label7 = new Label();
-            txt_contraseña = new TextBox();
             txt_email = new TextBox();
             label2 = new Label();
             cb_tipoUsuario = new ComboBox();
@@ -81,8 +79,6 @@
             // 
             // groupBox_carga
             // 
-            groupBox_carga.Controls.Add(label7);
-            groupBox_carga.Controls.Add(txt_contraseña);
             groupBox_carga.Controls.Add(txt_email);
             groupBox_carga.Controls.Add(label2);
             groupBox_carga.Controls.Add(cb_tipoUsuario);
@@ -102,22 +98,6 @@
             groupBox_carga.TabIndex = 0;
             groupBox_carga.TabStop = false;
             groupBox_carga.Text = "Carga de datos";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(6, 305);
-            label7.Name = "label7";
-            label7.Size = new Size(70, 15);
-            label7.TabIndex = 15;
-            label7.Text = "Contraseña:";
-            // 
-            // txt_contraseña
-            // 
-            txt_contraseña.Location = new Point(124, 302);
-            txt_contraseña.Name = "txt_contraseña";
-            txt_contraseña.Size = new Size(151, 23);
-            txt_contraseña.TabIndex = 14;
             // 
             // txt_email
             // 
@@ -446,8 +426,6 @@
         private TextBox txt_apellido;
         private TextBox txt_nombre;
         private Label label2;
-        private Label label7;
-        private TextBox txt_contraseña;
         private TextBox txt_email;
         private TextBox txt_apellidoFiltro;
         private Label label9;

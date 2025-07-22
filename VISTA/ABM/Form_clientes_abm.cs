@@ -336,13 +336,13 @@ namespace VISTA
             if (partes.Length != 2)
                 return false;
 
-            string usuario = partes[0];
+            string cliente = partes[0];
             string dominio = partes[1];
 
-            if (string.IsNullOrWhiteSpace(usuario) || usuario.Contains(" "))
+            if (string.IsNullOrWhiteSpace(cliente) || cliente.Contains(" "))
                 return false;
 
-            if (!Regex.IsMatch(usuario, @"^[a-zA-Z0-9._-]+$"))
+            if (!Regex.IsMatch(cliente, @"^[a-zA-Z0-9._-]+$"))
                 return false;
 
             if (!dominio.Contains('.'))

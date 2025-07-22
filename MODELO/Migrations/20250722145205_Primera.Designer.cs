@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MODELO.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250712232245_Primera")]
+    [Migration("20250722145205_Primera")]
     partial class Primera
     {
         /// <inheritdoc />
@@ -24,6 +24,21 @@ namespace MODELO.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("GrupoPermiso", b =>
+                {
+                    b.Property<int>("GruposGrupoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PermisosPermisoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GruposGrupoId", "PermisosPermisoId");
+
+                    b.HasIndex("PermisosPermisoId");
+
+                    b.ToTable("GrupoPermisos", (string)null);
+                });
 
             modelBuilder.Entity("MODELO.Alquiler", b =>
                 {
@@ -92,6 +107,10 @@ namespace MODELO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClienteId"));
 
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Dni")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -138,16 +157,11 @@ namespace MODELO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PermisoId"));
 
-                    b.Property<int?>("GrupoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PermisoId");
-
-                    b.HasIndex("GrupoId");
 
                     b.ToTable("Permisos");
                 });
@@ -186,8 +200,11 @@ namespace MODELO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsuarioId"));
 
-                    b.Property<string>("Contraseña")
+                    b.Property<string>("Apellido")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Contraseña")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -196,6 +213,10 @@ namespace MODELO.Migrations
 
                     b.Property<int>("GrupoId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre_usuario")
                         .IsRequired()
@@ -206,6 +227,21 @@ namespace MODELO.Migrations
                     b.HasIndex("GrupoId");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("GrupoPermiso", b =>
+                {
+                    b.HasOne("MODELO.Composite.Grupo", null)
+                        .WithMany()
+                        .HasForeignKey("GruposGrupoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MODELO.Composite.Permiso", null)
+                        .WithMany()
+                        .HasForeignKey("PermisosPermisoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MODELO.Alquiler", b =>
@@ -227,13 +263,6 @@ namespace MODELO.Migrations
                     b.Navigation("Nombre_cabaña");
                 });
 
-            modelBuilder.Entity("MODELO.Composite.Permiso", b =>
-                {
-                    b.HasOne("MODELO.Composite.Grupo", null)
-                        .WithMany("Permisos")
-                        .HasForeignKey("GrupoId");
-                });
-
             modelBuilder.Entity("MODELO.Usuario", b =>
                 {
                     b.HasOne("MODELO.Composite.Grupo", "Grupo")
@@ -243,11 +272,6 @@ namespace MODELO.Migrations
                         .IsRequired();
 
                     b.Navigation("Grupo");
-                });
-
-            modelBuilder.Entity("MODELO.Composite.Grupo", b =>
-                {
-                    b.Navigation("Permisos");
                 });
 #pragma warning restore 612, 618
         }

@@ -202,7 +202,6 @@ namespace MODELO.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Contraseña")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")

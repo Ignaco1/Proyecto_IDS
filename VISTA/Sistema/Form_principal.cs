@@ -148,16 +148,19 @@ namespace VISTA
 
         private void btn_ABM_Click(object sender, EventArgs e)
         {
+            HabilitarBotones(this);
             MostrarSubmenu(panel_ABM);
         }
 
         private void btn_cabañas_alquiler_Click(object sender, EventArgs e)
         {
+            HabilitarBotones(this);
             MostrarSubmenu(panel_reservas);
         }
 
         private void btn_informes_Click(object sender, EventArgs e)
         {
+            HabilitarBotones(this);
             OcultarSubmenu();
         }
 
@@ -186,6 +189,7 @@ namespace VISTA
 
         private void btn_seguridad_Click(object sender, EventArgs e)
         {
+            HabilitarBotones(this);
             MostrarSubmenu(panel_seguridad);
         }
 
@@ -214,7 +218,10 @@ namespace VISTA
             AbrirForms(new Form_clientes_abm());
         }
 
-
+        private void btn_ajustes_Click(object sender, EventArgs e)
+        {
+            AbrirForms(new Form_ajustesUsuario());
+        }
     }
 }
 

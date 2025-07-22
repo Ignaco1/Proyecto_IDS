@@ -35,7 +35,12 @@ namespace MODELO
                 .HasOne(u => u.Grupo)
                 .WithMany()
                 .HasForeignKey(u => u.GrupoId)
-                .OnDelete(DeleteBehavior.Cascade); 
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Usuario>()
+            .Property(u => u.Contraseña)
+            .IsRequired(false);
+
         }
 
     }

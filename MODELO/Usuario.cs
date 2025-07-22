@@ -15,7 +15,7 @@ namespace MODELO
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Nombre_usuario { get; set; }
-        public string Contraseña { get; set; }
+        public string? Contraseña { get; set; }
         public string Email { get; set; }
 
         public int GrupoId { get; set; }

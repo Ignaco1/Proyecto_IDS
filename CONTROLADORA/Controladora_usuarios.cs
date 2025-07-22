@@ -49,7 +49,7 @@ namespace CONTROLADORA
 
         }
 
-        public Usuario CrearUsuario(string grupoNombre, string nombre, string apellido, string nombre_usuario, string contraseña, string email)
+        public Usuario CrearUsuario(string grupoNombre, string nombre, string apellido, string nombre_usuario, string email)
         {
             using (var context = new Context())
             {
@@ -65,7 +65,6 @@ namespace CONTROLADORA
                 usuario.Nombre = nombre;
                 usuario.Apellido = apellido;
                 usuario.Nombre_usuario = nombre_usuario;
-                usuario.Contraseña = contraseña;
                 usuario.Email = email;
                 usuario.GrupoId = grupo.GrupoId;
                 
@@ -86,7 +85,7 @@ namespace CONTROLADORA
                 }
                 catch (Exception ex)
                 {
-                    return "Ocurrió un error en el sistema: " + ex.Message;
+                    return "Ocurrió un error en el sistema: " + ex.InnerException.Message;
 
                 }
 
@@ -157,6 +156,21 @@ namespace CONTROLADORA
 
         }
 
+
+        public Usuario ObtenerUsuarioId(int id)
+        {
+            using (var context = new Context())
+            {
+                var usuario = context.Usuarios.Include(u => u.Grupo).ThenInclude(g => g.Permisos).FirstOrDefault(u => u.UsuarioId == id);
+
+                if (usuario == null)
+                    return null;
+
+                return usuario;
+            }
+
+        }
+
         public bool ValidarUsuario(string email, string usuNom, int id)
         {
             using (var context = new Context())
@@ -180,7 +194,7 @@ namespace CONTROLADORA
             using (var context = new Context())
             {
                 return context.Usuarios.Any(u => u.Email.ToUpper() == email.ToUpper() && u.Nombre_usuario.ToUpper() == usuNom.ToUpper());
-                ;
+                
             }
 
         }
@@ -208,7 +222,7 @@ namespace CONTROLADORA
                     string asunto = "Contraseña temporal generada - VitaStays";
                     string mensaje = $"Hola {usuario.Nombre} {usuario.Apellido},\n\n" +
                                      $"Tu nueva contraseña temporal es: {nuevaContraseña}\n\n" +
-                                     $"Una vez iniciado sesion en el sistema, debes cambiar la contraseña.";
+                                     $"Una vez iniciado sesion en el sistema, debes cambiar la contraseña desde la parte de ajustes.";
 
                     mailService.EnviarCorreo(asunto, mensaje, new List<string> { usuario.Email });
 

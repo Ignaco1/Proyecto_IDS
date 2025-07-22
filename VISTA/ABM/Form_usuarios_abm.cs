@@ -96,7 +96,6 @@ namespace VISTA
             txt_nombre.Text = "";
             cb_tipoUsuario.Text = "";
             txt_email.Text = "";
-            txt_contraseña.Text = "";
         }
 
 
@@ -144,25 +143,11 @@ namespace VISTA
                 return;
             }
 
-            //if (!ValidarMail(txt_email.Text))
-            //{
-            //    MessageBox.Show("Ingrese un email posible para el usuario.\nEJ: Ignaciocarignano@vitastays.com", "Error");
-            //    return;
-            //}
-
-            if (string.IsNullOrWhiteSpace(txt_contraseña.Text))
+            if (!ValidarMail(txt_email.Text))
             {
-                MessageBox.Show("Ingrese una contraseña para el usuario.", "Error");
+                MessageBox.Show("Ingrese un email posible para el usuario.\nEJ: Ignaciocarignano@vitastays.com", "Error");
                 return;
             }
-
-            if (txt_contraseña.Text.Length < 6 || !txt_contraseña.Text.Any(char.IsLetter) || !txt_contraseña.Text.Any(char.IsDigit))
-            {
-                MessageBox.Show("La contraseña debe tener al menos 6 caracteres, incluyendo letras y números.", "Error");
-                return;
-            }
-
-
 
 
             #endregion
@@ -171,7 +156,7 @@ namespace VISTA
             {
                 if (!contro_us.ValidarUsuario(txt_email.Text, txt_usuario.Text, 0))
                 {
-                    usuario = contro_us.CrearUsuario(cb_tipoUsuario.Text, txt_nombre.Text, txt_apellido.Text, txt_usuario.Text, txt_contraseña.Text, txt_email.Text);
+                    usuario = contro_us.CrearUsuario(cb_tipoUsuario.Text, txt_nombre.Text, txt_apellido.Text, txt_usuario.Text, txt_email.Text);
 
                     try
                     {
@@ -202,16 +187,16 @@ namespace VISTA
                     usuario = contro_us.ListarUsuarios()[indice];
                 }
 
-                usuario.Nombre = txt_nombre.Text;
-                usuario.Apellido = txt_apellido.Text;
-                usuario.Nombre_usuario = txt_usuario.Text;
-                usuario.Contraseña = txt_contraseña.Text;
-                usuario.Email = txt_email.Text;
-
-                usuario.GrupoId = grupoSeleccionado.GrupoId;
 
                 if (!contro_us.ValidarUsuario(txt_email.Text, txt_usuario.Text, usuario.UsuarioId))
                 {
+                    usuario.Nombre = txt_nombre.Text;
+                    usuario.Apellido = txt_apellido.Text;
+                    usuario.Nombre_usuario = txt_usuario.Text;
+                    usuario.Email = txt_email.Text;
+
+                    usuario.GrupoId = grupoSeleccionado.GrupoId;
+
 
                     try
                     {
@@ -241,7 +226,6 @@ namespace VISTA
             }
             MODO_LISTA();
             LIMPIAR();
-            txt_contraseña.Enabled = true;
 
         }
 
@@ -259,7 +243,7 @@ namespace VISTA
                 return false;
 
             string usuario = partes[0];
-            string dominioCompleto = partes[1];
+            string dominio = partes[1];
 
             if (string.IsNullOrWhiteSpace(usuario) || usuario.Contains(" "))
                 return false;
@@ -267,7 +251,10 @@ namespace VISTA
             if (!Regex.IsMatch(usuario, @"^[a-zA-Z0-9._-]+$"))
                 return false;
 
-            return (dominioCompleto.Equals("vitastays.com", StringComparison.OrdinalIgnoreCase));
+            if (!dominio.Contains('.'))
+                return false;
+
+            return true;
 
         }
 
@@ -297,8 +284,6 @@ namespace VISTA
             txt_usuario.Text = usuario.Nombre_usuario;
             txt_email.Text = usuario.Email;
 
-            txt_contraseña.Text = usuario.Contraseña;
-            //txt_contraseña.Enabled = false;
 
             MODO_CARGA();
 
@@ -409,7 +394,6 @@ namespace VISTA
                 Nombre = u.Nombre + " " + u.Apellido,
                 Nombre_de_usuario = u.Nombre_usuario,
                 u.Email,
-                u.GrupoId,
                 Grupo = u.Grupo?.Nombre ?? "Sin grupo"
 
             }).ToList();
