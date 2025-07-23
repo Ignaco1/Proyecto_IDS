@@ -49,7 +49,7 @@ namespace CONTROLADORA
 
         }
 
-        public Usuario CrearUsuario(string grupoNombre, string nombre, string apellido, string nombre_usuario, string email)
+        public (Usuario usuario, string contraOriginal) CrearUsuario(string grupoNombre, string nombre, string apellido, string nombre_usuario, string email)
         {
             using (var context = new Context())
             {
@@ -67,9 +67,17 @@ namespace CONTROLADORA
                 usuario.Nombre_usuario = nombre_usuario;
                 usuario.Email = email;
                 usuario.GrupoId = grupo.GrupoId;
-                
 
-                return usuario;
+                string Contraseña = SeguridadUtilidades.GenerarContraseñaAleatoria();
+
+                string contraseñaEncriptada = SeguridadUtilidades.EncriptarSHA256(Contraseña);
+
+                usuario.Contraseña = contraseñaEncriptada;
+
+                usuario.PrimerIngreso = true;
+
+
+                return (usuario, Contraseña);
             }
         }
 
@@ -77,6 +85,7 @@ namespace CONTROLADORA
         {
             using (var context = new Context())
             {
+
                 try
                 {
                     context.Add(nuevoUsuario);
@@ -96,6 +105,7 @@ namespace CONTROLADORA
         {
             using (var context = new Context())
             {
+
                 try
                 {
                     var usuarioDb = context.Usuarios.FirstOrDefault(u => u.UsuarioId == usuario.UsuarioId);
@@ -109,6 +119,7 @@ namespace CONTROLADORA
                     usuarioDb.Contraseña = usuario.Contraseña;
                     usuarioDb.Email = usuario.Email;
                     usuarioDb.GrupoId = usuario.GrupoId;
+                    usuarioDb.PrimerIngreso = usuario.PrimerIngreso;
 
                     context.SaveChanges();
                     return "Usuario modificado con éxito";
@@ -199,6 +210,37 @@ namespace CONTROLADORA
 
         }
 
+        public string EnviarDatos(string nombre_usuario, string email, string contraseña)
+        {
+            using (var context = new Context())
+            {
+                var usuario = context.Usuarios.FirstOrDefault(u => u.Nombre_usuario == nombre_usuario && u.Email == email);
+
+                if (usuario == null)
+                {
+                    return "El usuario o email no están registrados correctamente.";
+                }
+
+                try
+                {
+                    var mailService = new ServicioCorreoSistema();
+                    string asunto = "Datos de ingreso inicial - VitaStays";
+                    string mensaje = $"Hola {usuario.Nombre} {usuario.Apellido},\n\n" +
+                                     $"Tu usuario es: {usuario.Nombre_usuario}\n\n " +
+                                     $"Tu contraseña es: {contraseña}\n\n";
+
+                    mailService.EnviarCorreo(asunto, mensaje, new List<string> { usuario.Email });
+
+                    return "Datos iniciales enviados al usuario.";
+                }
+                catch (Exception ex)
+                {
+                    return "Error al enviar el correo:  " + ex.Message;
+                }
+            }
+
+        }
+
         public string RecuperarContraseña(string nombre_usuario, string email)
         {
             using (var context = new Context())
@@ -206,7 +248,9 @@ namespace CONTROLADORA
                 var usuario = context.Usuarios.FirstOrDefault(u =>u.Nombre_usuario == nombre_usuario && u.Email == email);
 
                 if (usuario == null)
+                {
                     return "El usuario o email no están registrados correctamente.";
+                }
 
                 string nuevaContraseña = SeguridadUtilidades.GenerarContraseñaAleatoria();
 
@@ -221,7 +265,7 @@ namespace CONTROLADORA
                     var mailService = new ServicioCorreoSistema();
                     string asunto = "Contraseña temporal generada - VitaStays";
                     string mensaje = $"Hola {usuario.Nombre} {usuario.Apellido},\n\n" +
-                                     $"Tu nueva contraseña temporal es: {nuevaContraseña}\n\n" +
+                                     $"Tu nueva contraseña es: {nuevaContraseña}\n\n" +
                                      $"Una vez iniciado sesion en el sistema, debes cambiar la contraseña desde la parte de ajustes.";
 
                     mailService.EnviarCorreo(asunto, mensaje, new List<string> { usuario.Email });

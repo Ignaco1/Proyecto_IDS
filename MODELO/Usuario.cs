@@ -22,5 +22,7 @@ namespace MODELO
 
         [ForeignKey("GrupoId")]
         public virtual Grupo Grupo { get; set; }
+
+        public bool PrimerIngreso { get; set; } = true;
     }
 }

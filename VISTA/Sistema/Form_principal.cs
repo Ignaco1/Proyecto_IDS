@@ -15,6 +15,7 @@ namespace VISTA
 {
     public partial class Form_principal : Form
     {
+        CONTROLADORA.Controladora_usuarios contro_us = new CONTROLADORA.Controladora_usuarios();
         public Form_principal()
         {
             InitializeComponent();
@@ -179,7 +180,16 @@ namespace VISTA
 
         private void btn_cerrarSesion_Click(object sender, EventArgs e)
         {
+            var usuario = contro_us.ObtenerUsuarioId(UsuarioCache.UsuarioId);
+
+            if (usuario.PrimerIngreso == true)
+            {
+                MessageBox.Show("Antes de salir usted debe cambiar su contraseña desde la parte de ajustes.\n\nGracias.", "Aviso");
+                return;
+            }
+
             var resultado = MessageBox.Show("Esta seguro que desea cerrar sesión?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
             if (resultado == DialogResult.Yes)
             {
                 this.Close();

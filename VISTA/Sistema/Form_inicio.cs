@@ -151,6 +151,10 @@ namespace VISTA
 
                     Form_principal form_principal = new Form_principal();
                     form_principal.Show();
+                    if(usuario.PrimerIngreso == true)
+                    {
+                        MessageBox.Show("Por seguridad del sistema, por favor cambie su contraseña desde la parte de ajustes.\n\nGracias.", "Aviso");
+                    }
                     form_principal.FormClosed += CerraSesion;
 
                     this.Hide();

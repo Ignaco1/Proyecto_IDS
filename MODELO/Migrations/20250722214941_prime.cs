@@ -5,25 +5,25 @@
 namespace MODELO.Migrations
 {
     /// <inheritdoc />
-    public partial class first : Migration
+    public partial class prime : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Apellido",
-                table: "Clientes",
-                type: "nvarchar(max)",
+            migrationBuilder.AddColumn<bool>(
+                name: "PrimerIngreso",
+                table: "Usuarios",
+                type: "bit",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: false);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Apellido",
-                table: "Clientes");
+                name: "PrimerIngreso",
+                table: "Usuarios");
         }
     }
 }

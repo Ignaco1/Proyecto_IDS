@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MODELO.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250716225818_prime")]
+    [Migration("20250722214941_prime")]
     partial class prime
     {
         /// <inheritdoc />
@@ -106,6 +106,10 @@ namespace MODELO.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClienteId"));
+
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Dni")
                         .IsRequired()
@@ -201,7 +205,6 @@ namespace MODELO.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Contraseña")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -218,6 +221,9 @@ namespace MODELO.Migrations
                     b.Property<string>("Nombre_usuario")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PrimerIngreso")
+                        .HasColumnType("bit");
 
                     b.HasKey("UsuarioId");
 

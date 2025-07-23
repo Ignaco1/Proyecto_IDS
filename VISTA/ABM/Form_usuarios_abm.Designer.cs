@@ -117,6 +117,7 @@
             // 
             // cb_tipoUsuario
             // 
+            cb_tipoUsuario.DropDownStyle = ComboBoxStyle.DropDownList;
             cb_tipoUsuario.FormattingEnabled = true;
             cb_tipoUsuario.Location = new Point(124, 81);
             cb_tipoUsuario.Name = "cb_tipoUsuario";

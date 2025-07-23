@@ -146,22 +146,22 @@
             // 
             txt_usuario.BackColor = SystemColors.AppWorkspace;
             txt_usuario.BorderStyle = BorderStyle.None;
-            txt_usuario.Font = new Font("Century Gothic", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txt_usuario.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_usuario.ForeColor = Color.FromArgb(150, 43, 127);
             txt_usuario.Location = new Point(370, 101);
             txt_usuario.Name = "txt_usuario";
-            txt_usuario.Size = new Size(303, 26);
+            txt_usuario.Size = new Size(303, 20);
             txt_usuario.TabIndex = 14;
             // 
             // txt_email
             // 
             txt_email.BackColor = SystemColors.AppWorkspace;
             txt_email.BorderStyle = BorderStyle.None;
-            txt_email.Font = new Font("Century Gothic", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txt_email.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_email.ForeColor = Color.FromArgb(150, 43, 127);
             txt_email.Location = new Point(361, 172);
             txt_email.Name = "txt_email";
-            txt_email.Size = new Size(332, 26);
+            txt_email.Size = new Size(332, 20);
             txt_email.TabIndex = 16;
             // 
             // pictureBox_error

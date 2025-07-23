@@ -1,4 +1,5 @@
-﻿using MODELO.Composite;
+﻿using CAPA_COMUN.Cache;
+using MODELO.Composite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,7 +42,20 @@ namespace VISTA
         {
             dataGridView1.DataSource = null;
 
-            var grupos = contro_grup.ListarGrupos()
+            var grupos = contro_grup.ListarGrupos();
+
+            List<MODELO.Composite.Grupo> gruposFiltrados;
+
+            if (UsuarioCache.UsuarioGrupoNombre != "SuperAdministrador")
+            {
+                gruposFiltrados = grupos.Where(g => g.Nombre != "SuperAdministrador").ToList();
+            }
+            else
+            {
+                gruposFiltrados = grupos.ToList();
+            }
+
+            var datosGrilla = gruposFiltrados
                 .Select(g => new
                 {
                     ID = g.GrupoId,
@@ -50,7 +64,7 @@ namespace VISTA
                 })
                 .ToList();
 
-            dataGridView1.DataSource = grupos;
+            dataGridView1.DataSource = datosGrilla;
         }
 
         private void MODO_GRILLA()

@@ -92,6 +92,7 @@ namespace VISTA
             {
                 string contraEncriptada = SeguridadUtilidades.EncriptarSHA256(txt_contraNueva.Text);
                 usuario.Contraseña = contraEncriptada;
+                usuario.PrimerIngreso = false;
 
                 contro_us.ModificarUsuario(usuario);
                 MessageBox.Show("La clave ha sido cambiada exitosamente.", "Éxito");

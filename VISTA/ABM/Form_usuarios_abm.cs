@@ -1,4 +1,6 @@
-﻿using MODELO;
+﻿using CAPA_COMUN.Cache;
+using CONTROLADORA.Utilidades;
+using MODELO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,13 +40,23 @@ namespace VISTA
 
             var grupos = contro_grup.ListarGrupos();
 
+            // Verificás si el usuario actual es SuperAdministrador
+            bool esSuperAdmin = UsuarioCache.UsuarioGrupoNombre.Equals("SuperAdministrador", StringComparison.OrdinalIgnoreCase);
+
             foreach (var grupo in grupos)
             {
+                // Solo mostrás el grupo SuperAdministrador si el usuario actual lo es
+                if (grupo.Nombre.Equals("SuperAdministrador", StringComparison.OrdinalIgnoreCase) && !esSuperAdmin)
+                {
+                    continue;
+                }
+
                 cb_tipoUsuario.Items.Add(grupo.Nombre);
                 cb_tipoFiltro.Items.Add(grupo.Nombre);
             }
 
         }
+
 
         private void ARMA_GRILLA()
         {
@@ -94,7 +106,7 @@ namespace VISTA
             txt_usuario.Text = "";
             txt_apellido.Text = "";
             txt_nombre.Text = "";
-            cb_tipoUsuario.Text = "";
+            cb_tipoUsuario.SelectedIndex = -1;
             txt_email.Text = "";
         }
 
@@ -102,6 +114,8 @@ namespace VISTA
         private void btn_guardar_Click(object sender, EventArgs e)
         {
             MODELO.Usuario usuario = null;
+
+            var usuarioLogueado = contro_us.ObtenerUsuarioId(UsuarioCache.UsuarioId);
 
             #region VALIDACIONES
 
@@ -118,6 +132,7 @@ namespace VISTA
                 MessageBox.Show("Seleccione un tipo de usuario posible.\nNo ingrese usuarios que no existen. ", "Error");
                 return;
             }
+
 
             if (string.IsNullOrWhiteSpace(txt_nombre.Text))
             {
@@ -145,7 +160,7 @@ namespace VISTA
 
             if (!ValidarMail(txt_email.Text))
             {
-                MessageBox.Show("Ingrese un email posible para el usuario.\nEJ: Ignaciocarignano@vitastays.com", "Error");
+                MessageBox.Show("Ingrese un email posible para el usuario.\nEJ: Ignaciocarignano@gmail.com", "Error");
                 return;
             }
 
@@ -154,14 +169,18 @@ namespace VISTA
 
             if (vari == "A")
             {
+
                 if (!contro_us.ValidarUsuario(txt_email.Text, txt_usuario.Text, 0))
                 {
-                    usuario = contro_us.CrearUsuario(cb_tipoUsuario.Text, txt_nombre.Text, txt_apellido.Text, txt_usuario.Text, txt_email.Text);
+                    var (usuario1, contra) = contro_us.CrearUsuario(cb_tipoUsuario.Text, txt_nombre.Text, txt_apellido.Text, txt_usuario.Text, txt_email.Text);
+
 
                     try
                     {
-                        string resultado = contro_us.AgregarUsuario(usuario);
+                        string resultado = contro_us.AgregarUsuario(usuario1);
                         MessageBox.Show(resultado);
+                        string respuesta = contro_us.EnviarDatos(usuario1.Nombre_usuario, usuario1.Email, contra);
+                        MessageBox.Show(respuesta);
                     }
                     catch (Exception ex)
                     {
@@ -178,6 +197,7 @@ namespace VISTA
 
             if (vari == "M")
             {
+
                 if (variF == "F")
                 {
                     usuario = listaUsuariosFiltro[indice];
@@ -185,6 +205,12 @@ namespace VISTA
                 else
                 {
                     usuario = contro_us.ListarUsuarios()[indice];
+                }
+
+                if (usuario.Grupo.Nombre == "SuperAdministrador" && usuarioLogueado.Grupo.Nombre != "SuperAdministrador")
+                {
+                    MessageBox.Show("No tiene permisos para modificar a un SuperAdministrador.");
+                    return;
                 }
 
 
@@ -226,6 +252,7 @@ namespace VISTA
             }
             MODO_LISTA();
             LIMPIAR();
+            cb_tipoUsuario.Enabled = true;
 
         }
 
@@ -266,8 +293,10 @@ namespace VISTA
                 return;
             }
 
+
             MODELO.Usuario usuario;
             vari = "M";
+            var usuarioLogueado = contro_us.ObtenerUsuarioId(UsuarioCache.UsuarioId);
 
             if (variF == "F")
             {
@@ -278,12 +307,19 @@ namespace VISTA
                 usuario = contro_us.ListarUsuarios()[indice];
             }
 
-            cb_tipoUsuario.Text = usuario.Grupo?.Nombre;
+            if (usuario.Grupo.Nombre == "SuperAdministrador" && usuarioLogueado.Grupo.Nombre != "SuperAdministrador")
+            {
+                MessageBox.Show("No tiene permisos para modificar a un SuperAdministrador.");
+                return;
+            }
+
+            cb_tipoUsuario.SelectedItem = usuario.Grupo.Nombre;
             txt_nombre.Text = usuario.Nombre;
             txt_apellido.Text = usuario.Apellido;
             txt_usuario.Text = usuario.Nombre_usuario;
             txt_email.Text = usuario.Email;
 
+            cb_tipoUsuario.Enabled = false;
 
             MODO_CARGA();
 
@@ -309,6 +345,8 @@ namespace VISTA
             }
 
             MODELO.Usuario usuario;
+            var usuarioLogueado = contro_us.ObtenerUsuarioId(UsuarioCache.UsuarioId);
+
 
             if (variF == "F")
             {
@@ -317,6 +355,18 @@ namespace VISTA
             else
             {
                 usuario = contro_us.ListarUsuarios()[indice];
+            }
+
+            if (usuario.UsuarioId == usuarioLogueado.UsuarioId)
+            {
+                MessageBox.Show("Un usuario no puede eliminarse a sí mismo.", "Error");
+                return;
+            }
+
+            if (usuario.Grupo.Nombre == "SuperAdministrador" && usuarioLogueado.Grupo.Nombre != "SuperAdministrador")
+            {
+                MessageBox.Show("No tiene permisos para modificar a un SuperAdministrador.");
+                return;
             }
 
             DialogResult result = MessageBox.Show($"Está seguro que desea eliminar al usuario:\n\nNombre: {usuario.Nombre + " " + usuario.Apellido}\n\nNombre de usuario: {usuario.Nombre_usuario}\n\nEmail: {usuario.Email}\n\nGrupo: {usuario.Grupo.Nombre}", "AVISO", MessageBoxButtons.YesNo);
@@ -349,12 +399,13 @@ namespace VISTA
         {
             MODO_LISTA();
             LIMPIAR();
+            cb_tipoUsuario.Enabled = true;
         }
 
         private void btn_filtrar_Click(object sender, EventArgs e)
         {
             variF = "F";
-            
+
             btn_quitarFiltro.Enabled = true;
 
             FILTRAR();

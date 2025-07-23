@@ -219,6 +219,9 @@ namespace MODELO.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("PrimerIngreso")
+                        .HasColumnType("bit");
+
                     b.HasKey("UsuarioId");
 
                     b.HasIndex("GrupoId");
